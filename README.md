@@ -1,2 +1,2 @@
-# m1p10mean-L-onard-Sambatra
+# m1p10mean-Léonard-Sambatra
 Projet Mean
