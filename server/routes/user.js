@@ -26,7 +26,6 @@ userRoutes.get("/verifier", async (req, res) => {
 
 userRoutes.post("/creerUser", (req, res) => {
     let { type, nom, prenom, email, mdp, contact } = req.body;
-    console.log(req.body)
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(mdp, salt);
     const newUser = new User({ type: type, nom:nom, prenom:prenom, email: email, mdp : hash, contact:contact});
