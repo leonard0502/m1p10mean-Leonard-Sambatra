@@ -52,3 +52,4 @@ voitureRoutes.get("/getAllRepParVoiture", (req,res) => {
         });
       });
 });
+module.exports = voitureRoutes;

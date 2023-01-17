@@ -84,4 +84,4 @@ paiementRoutes.post("/Payer", (req, res) => {
 //   }
   
 // });
-// module.exports = paiementRoutes;
+module.exports = paiementRoutes;
