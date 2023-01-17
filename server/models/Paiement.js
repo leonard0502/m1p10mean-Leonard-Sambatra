@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = require("mongodb").ObjectId;
 
-const FactureSchema  = new Schema({
+const PaiementSchema  = new Schema({
   idFiche: {
     type: ObjectId,
     ref: "Fiche",
@@ -11,7 +11,7 @@ const FactureSchema  = new Schema({
   montantAPayer: { type: Number, required : true},
   remise: { type: Number, required : true},
   montantPayer: { type: Number, required : true},
-  datePaie: { type: Date, required : true}
+  datePaie: { type: Date, default: Date.now , required : true}
 });
 
-module.exports = mongoose.model("Facture", FactureSchema);
+module.exports = mongoose.model("Paiement", PaiementSchema);

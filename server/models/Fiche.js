@@ -14,6 +14,7 @@ const FicheSchema = new Schema({
     required: true,
   },
   etat : {type : Number, required : true},
+  etatPaie : {type : Number, required : true},
   dateFiche : {type : Date, required : true},
   reparation : [{intitule : {type : String, required : true}, dateDebut : {type : Date, required : true}, dateFin : {type : Date, required : true}, avancement : {type : Number, required : true} }]
 });
