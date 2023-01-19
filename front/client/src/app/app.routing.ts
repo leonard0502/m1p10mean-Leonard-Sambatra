@@ -8,9 +8,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
+import { FicheDepotComponent } from './fiche-depot/fiche-depot.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
+    { path: 'depot',             component: FicheDepotComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'register',           component: SignupComponent },
     { path: 'landing',          component: LandingComponent },

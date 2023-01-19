@@ -13,10 +13,10 @@ const FicheSchema = new Schema({
     ref: "User",
     required: true,
   },
-  etat : {type : Number, required : true},
-  etatPaie : {type : Number, required : true},
+  etat : {type : Number, default : 0 },
+  etatPaie : {type : Number, default : 0 },
   dateFiche : {type : Date, required : true},
-  reparation : [{intitule : {type : String, required : true}, dateDebut : {type : Date, required : true}, dateFin : {type : Date, required : true}, avancement : {type : Number, required : true} }]
+  reparation : [{intitule : {type : String, required : true}, dateDebut : {type : Date, required : true}, dateFin : {type : Date, default: null}, avancement : {type : Number, required : true} , prix : {type : Number, required : true}}]
 });
 
 module.exports = mongoose.model("Fiche", FicheSchema);

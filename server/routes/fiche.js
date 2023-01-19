@@ -3,6 +3,7 @@ const ObjectId = require("mongodb").ObjectId;
 const ficheRoutes = express.Router();
 const nodemailer = require("nodemailer");
 const Fiche = require("../models/Fiche");
+const Voiture = require("../models/Voiture");
 
 let transporter = nodemailer.createTransport({
   pool: true,
@@ -26,9 +27,21 @@ transporter.verify((err, success) => {
     console.log(success);
   }
 });
-ficheRoutes.post("/creerFiche", (req, res) => {
+
+
+ficheRoutes.post("/creerFiche",async  (req, res) => {
   let { idVoiture, idUser, etat, dateFiche, reparation } = req.body;
-  const newFiche = new Fiche({ idVoiture: ObjectId(idVoiture), idUser : ObjectId(IdUser), etat : etat, dateFiche : dateFiche, reparation : reparation},);
+  /**
+   * Si la voiture n'existe pas encore
+   */
+  if(!idVoiture){
+        const { matricule , marque , type} = req.body;
+        await Voiture.create({ matricule , marque , type}
+          ).then((resp) =>{
+            idVoiture = resp._id;
+       });
+    }
+    const newFiche =  new Fiche({ idVoiture: ObjectId(idVoiture), idUser : ObjectId(idUser), etat : etat, dateFiche : dateFiche, reparation : reparation},);
   newFiche
     .save()
     .then(() => {
@@ -37,13 +50,15 @@ ficheRoutes.post("/creerFiche", (req, res) => {
         message: "Création de fiche effectué!",
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log("Error////",err.message);
       res.json({
         status: "ECHEC",
-        message: "Une erreur s'est produit lors de la création de la Fiche!",
+        message: "Une erreur s'est produit lors de la création de la Fiche! "+err.message,
       });
     });
 });
+
 ficheRoutes.get("/getFiche", (req, res) => {
   Fiche.find({})
     .then((result) => {

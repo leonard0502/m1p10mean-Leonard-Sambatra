@@ -9,7 +9,7 @@ app.use("/depense", require("./routes/depense"));
 app.use("/fiche", require("./routes/fiche"));
 app.use("/paiement", require("./routes/paiement"));
 app.use("/user", require("./routes/user"));
-// app.use("/voiture", require("./routes/voiture"));
+app.use("/voiture", require("./routes/voiture"));
 require("./db/connection");
 require('dotenv').config();
 

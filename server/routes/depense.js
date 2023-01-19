@@ -17,7 +17,7 @@ depenseRoutes.post("/creerDepense", (req, res) => {
     .catch(() => {
       res.json({
         status: "ECHEC",
-        message: "Une erreur s'est produit lors de la création !",
+        message: "Une erreur s'est produit lors de la création de la dépense!",
       });
     });
 });
