@@ -10,8 +10,11 @@ import { FicheDepotService } from 'src/service/fiche-depot';
 })
 
 export class FicheDepotComponent implements OnInit {
-  focus: any;
-  focus1: any;
+  /**
+   * Attribut component
+   *  -FormGroup mapping formulaire
+   */
+  
   ficheForm : FormGroup;
   repForm : FormGroup;
   formVehicule ! : String;
@@ -23,6 +26,10 @@ export class FicheDepotComponent implements OnInit {
     console.log(this.formVehicule);
    }
 
+   /**
+    * Initialisation variable iso constructeur
+    *   
+    */
   ngOnInit() {
     this.idUser = 6;
     this.ficheForm = this.formBuilder.group({
@@ -32,7 +39,6 @@ export class FicheDepotComponent implements OnInit {
       marque : [null],
       type : [null]
     });
-
 
     this.repForm = this.formBuilder.group({
       intitule : [null],

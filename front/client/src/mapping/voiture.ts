@@ -1,4 +1,6 @@
-
+/**
+ * Class Voiture
+ */
 
 export class Voiture {
  

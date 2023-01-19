@@ -8,7 +8,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-
+/**
+ * Service accès au données FicheDepotService
+ */
 export class FicheDepotService {
  
   constructor(private http : HttpClient){
@@ -19,6 +21,9 @@ export class FicheDepotService {
      this.http.post(environment.back+'/voiture',voiture).subscribe((res : {message , error}) => alert(res?.message));
    }
    
+   /**
+    *  POST localhost:333/fiche/creerFiche
+    */
    createfiche(fiche : any) {
     // console.log(fiche);
     this.http.post(environment.back+'/fiche/creerFiche',fiche).subscribe((res : {message , error}) => alert(res?.message));
