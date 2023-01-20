@@ -33,6 +33,9 @@ const routes: Routes = [
       }, {
         path: 'simple-page',
         loadChildren: () => import('./pages/simple-page/simple-page.module').then(m => m.SimplePageModule)
+      }, {
+        path: 'depense',
+        loadChildren: () => import('./depense/depense.module').then(m => m.DepenseModule)
       }
     ]
   },

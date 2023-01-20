@@ -42,6 +42,13 @@ const MENUITEMS = [
         icon: 'ti-home'
       },
       {
+        state: 'depense',
+        short_label: 'D',
+        name: 'Depense',
+        type: 'link',
+        icon: 'ti-home'
+      },
+      {
         state: 'basic',
         short_label: 'B',
         name: 'Basic Components',
@@ -177,19 +184,6 @@ const MENUITEMS = [
         name: 'Simple Page',
         type: 'link',
         icon: 'ti-layout-sidebar-left'
-      }
-    ]
-  }, {
-    label: 'Support',
-    main: [
-      {
-        state: 'Upgrade To Pro',
-        short_label: 'U',
-        external: 'https://codedthemes.com/item/guru-able-admin-template/',
-        name: 'Upgrade To Pro',
-        type: 'external',
-        icon: 'ti-layout-list-post',
-        target: true
       }
     ]
   }
