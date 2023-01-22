@@ -14,7 +14,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { FicheDepotComponent } from './fiche-depot/fiche-depot.component';
+import { FicheDepotComponent } from './fiche/fiche-depot/fiche-depot.component';
+import { FicheGarageComponent } from './fiche/fiche-garage/fiche-garage.component';
+import { FicheDetailsComponent } from './fiche/fiche-details/fiche-details.component';
 
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
@@ -29,7 +31,9 @@ import { LoginComponent } from './login/login.component';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    FicheDepotComponent
+    FicheDepotComponent,
+    FicheGarageComponent,
+    FicheDetailsComponent
   ],
   imports: [
     BrowserModule,

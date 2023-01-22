@@ -60,7 +60,17 @@ ficheRoutes.post("/creerFiche",async  (req, res) => {
 });
 
 ficheRoutes.get("/getFiche", (req, res) => {
-  Fiche.find({})
+  let query = [{ "_id":{$ne:null} }];
+  if ( req?.query?.idUser ) {
+    query.push({ idUser : { $eq : req?.query?.idUser}});
+  }
+  if ( req?.query?.etat ) {
+    query.push({ etat : { $lt : req?.query?.etat}});
+  }
+  Fiche.find({
+  $and: [...query],
+  }).populate('idVoiture')
+    .sort({ "dateFiche": 1 })
     .then((result) => {
       if (result.length > 0) {
         res.json(result);
@@ -71,20 +81,20 @@ ficheRoutes.get("/getFiche", (req, res) => {
         });
       }
     })
-    .catch(() => {
+    .catch((error) => {
       res.json({
         status: "ECHEC",
-        message: "Une erreur s'est produit lors de l'obtention des fiches!",
+        message: `Une erreur s'est produit lors de l'obtention des fiches ${error.message}!`,
       });
     });
 });
-ficheRoutes.get("/getFicheById/", (req, res) => {
+ficheRoutes.get("/getFicheById", (req, res) => {
     Fiche.find({_id : ObjectId(req.query.id)})
     .populate("idVoiture")
     .populate("idUser")
       .then((result) => {
         if (result.length > 0) {
-          res.json(result);
+          res.json(result[0]);
         } else {
           res.json({
             status: "ECHEC",

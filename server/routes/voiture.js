@@ -4,7 +4,6 @@ const voitureRoutes = express.Router();
 const Fiche = require("../models/Fiche");
 const Voiture = require('../models/Voiture');
 
-
 /**
  *   Inserer voiture user POST /voiture
  */
@@ -79,33 +78,38 @@ voitureRoutes.get("/getAllRepParVoiture", (req,res) => {
 /**
  *   voitures user GET /voiture/user/:id
  */
-voitureRoutes.get("/user/:idUser", (req,res) => {
-  let voiture = [];
-  Fiche.find({idUser : ObjectId(Number(req.params.idUser))})
-    .then((result) => {
-      //  console.log("Tonga ttttttttttttttt",result);
-     if (result.length > 0) {
-          result.forEach((resu) => {
+ async function getVoiture(idVoiture){
+   const listret = await Voiture.find({_id : idVoiture});
+   if( listret.length > 0 ) {
+      return listret[0];
+   } else {
+      return null;
+   }
+    }
+voitureRoutes.get("/user/:idUser",async (req,res) => {
+  try {
+    const voiture = [];
+    const listFiche = await Fiche.find({idUser : ObjectId(req.params.idUser)});
+    let tailleret = listFiche.length;
 
-              Voiture.find({_id : ObjectId(resu.idVoiture.toString())})
-              .then((resv) => {
-                voiture.push(resv);
-              });
-          });
-          res.json(voiture);
+    await listFiche.forEach(async (resu) => {
+      const tempVoiture = await getVoiture(resu.idVoiture);
+      if ( voiture.filter(word => word._id.toString() === tempVoiture._id.toString()).length === 0 ) {
+        voiture.push(tempVoiture);
       } else {
-        res.json({
-          status: "ECHEC",
-          message: "Ce client n'a aucune Voiture",
-        });
+        tailleret--;
       }
-    })
-    .catch(() => {
-      res.json({
-        status: "ECHEC",
-        message: "Une erreur s'est produit lors de l'obtention des reoaration de cette voiture!",
-      });
+      if ( voiture.length === tailleret ) {
+          res.json(voiture);
+      }
+   });
+  } catch( error) {
+    console.log(error);
+    res.json({
+      status: "ECHEC",
+      message: "Une erreur s'est produit lors de l'obtention des reoaration de cette voiture!",
     });
+  }
 });
 
 module.exports = voitureRoutes;

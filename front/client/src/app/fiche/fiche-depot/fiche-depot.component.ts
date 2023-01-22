@@ -2,6 +2,8 @@ import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FicheDepotService } from 'src/service/fiche-depot';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-fiche-depot',
@@ -18,20 +20,18 @@ export class FicheDepotComponent implements OnInit {
   ficheForm : FormGroup;
   repForm : FormGroup;
   formVehicule ! : String;
-  listVehicule ! : Object[];
-  listReparation ! : Object[];
-  idUser ! : number; 
+  listVehicule$ ! : Observable<Object[]>;
+  idUser ! : String; 
 
-  constructor(private formBuilder : FormBuilder,private ficheDepotService : FicheDepotService) {
-    console.log(this.formVehicule);
+  constructor(private formBuilder : FormBuilder,private ficheDepotService : FicheDepotService,private router : Router) {
+
    }
 
    /**
     * Initialisation variable iso constructeur
     *   
     */
-  ngOnInit() {
-    this.idUser = 6;
+   ngOnInit() {
     this.ficheForm = this.formBuilder.group({
       formVehicules : ['false'],
       idVoiture : [null],
@@ -40,16 +40,11 @@ export class FicheDepotComponent implements OnInit {
       type : [null]
     });
 
-    this.repForm = this.formBuilder.group({
-      intitule : [null],
-      prix : [null]
-    });
-
     this.formVehicule = 'false';
-    this.listVehicule = [{ id : 1 , matricule : '2489 TAC' , marque : 'Audi' , type : 'léger' , selected : true},
-                          { id : 2 , matricule : '1224 TAE' , marque : 'Toyota' , type : '4wd'}
-                      ];
-    this.listReparation = [];
+
+    this.idUser = '000000068499e1e8ab81fcd0';
+    this.listVehicule$ = this.ficheDepotService.getVoitureUser(this.idUser);    
+    
   }
 
   ngOnChanges() {
@@ -61,16 +56,14 @@ export class FicheDepotComponent implements OnInit {
       idUser : this.idUser,
       dateFiche : new Date(),
       etat : 0,
-      reparation: this.listReparation,  
+      reparation : [],
+    }).subscribe((res : {message , error}) =>{ 
+      alert(res?.message);
+      this.router.navigate(
+        ['/garage'] 
+       ); 
     });
-  }
-  
-  ngSubmitrepare() {
-    this.listReparation.push({...this.repForm.value , dateDebut : new Date() , dateFin : null , avancement : 0 });
-  }
 
-  cancelRepare(index) {
-    this.listReparation.splice(index,1);
   }
 
 }
