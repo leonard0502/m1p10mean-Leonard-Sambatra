@@ -4,7 +4,10 @@ const depenseRoutes = express.Router();
 const Depense = require("../models/Depense");
 
 depenseRoutes.post("/creerDepense", (req, res) => {
-  let { intitule, montant, mois, annee } = req.body;
+  let { intitule, montant, mois, annee, dateDepense } = req.body;
+  let date = new Date(dateDepense);
+  mois = date.getMonth()+1;
+  annee = date.getFullYear();
   const newDepense = new Depense({ intitule: intitule, mois:mois, annee: annee ,montant : montant},);
   newDepense
     .save()
