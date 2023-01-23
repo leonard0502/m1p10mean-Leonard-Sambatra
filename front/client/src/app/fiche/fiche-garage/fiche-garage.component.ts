@@ -14,6 +14,7 @@ export class FicheGarageComponent implements OnInit {
 
   idUser ! : string; 
   listeFiche$ ! : Observable<Object[]>;
+  loading ! : boolean;
 
   constructor(private ficheDepotService : FicheDepotService) {
 
@@ -24,8 +25,10 @@ export class FicheGarageComponent implements OnInit {
     *   
     */
    ngOnInit() {
+    this.loading = true ; 
     this.idUser = '000000068499e1e8ab81fcd0';
     this.listeFiche$ = this.ficheDepotService.getUserFichegarage(this.idUser);  
+    this.loading = false;
   }
 
 

@@ -12,9 +12,9 @@ export class FicheDetailsComponent implements OnInit {
 
   id ! : string; 
   fiche$ ! : Observable<Object>;
+  loading ! : boolean; 
 
   constructor(private ficheDepotService : FicheDepotService,private activatedRoute : ActivatedRoute) {
-
    }
 
    /**
@@ -22,8 +22,10 @@ export class FicheDetailsComponent implements OnInit {
     *   
     */
    ngOnInit() {
-	this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.loading = true;
+	  this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.fiche$ = this.ficheDepotService.getUserFicheById(this.id);  
+    this.loading = false;
   }
 
 

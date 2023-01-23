@@ -22,6 +22,7 @@ export class FicheDepotComponent implements OnInit {
   formVehicule ! : String;
   listVehicule$ ! : Observable<Object[]>;
   idUser ! : String; 
+  loading ! : boolean;
 
   constructor(private formBuilder : FormBuilder,private ficheDepotService : FicheDepotService,private router : Router) {
 
@@ -39,11 +40,13 @@ export class FicheDepotComponent implements OnInit {
       marque : [null],
       type : [null]
     });
-
+    this.loading = true;
     this.formVehicule = 'false';
 
     this.idUser = '000000068499e1e8ab81fcd0';
-    this.listVehicule$ = this.ficheDepotService.getVoitureUser(this.idUser);    
+    this.listVehicule$ = this.ficheDepotService.getVoitureUser(this.idUser);   
+    this.loading = false;
+
     
   }
 
@@ -51,6 +54,7 @@ export class FicheDepotComponent implements OnInit {
   }
 
   ngSave(){
+    this.loading = true;
     this.ficheDepotService.createfiche({
       ...this.ficheForm.value,
       idUser : this.idUser,
@@ -58,6 +62,7 @@ export class FicheDepotComponent implements OnInit {
       etat : 0,
       reparation : [],
     }).subscribe((res : {message , error}) =>{ 
+    this.loading = false;
       alert(res?.message);
       this.router.navigate(
         ['/garage'] 
