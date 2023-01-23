@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 /**
  * Service accès au données DepenseService
  */
-export class depenseService {
+export class DepenseService {
  
   constructor(private http : HttpClient){
 
@@ -19,6 +19,10 @@ export class depenseService {
   createDepense(form : any) {
     let url = environment.Depense_base_url+'/creerDepense';
     return this.http.post(url,form);
+   }
+   getDepense() {
+    let url = environment.Depense_base_url+'/getDepense';
+    return this.http.get(url);
    }
    
 }

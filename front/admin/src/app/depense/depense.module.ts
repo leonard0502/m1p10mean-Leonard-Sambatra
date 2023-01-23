@@ -10,7 +10,7 @@ import { AjoutDepenseComponent } from './ajout-depense/ajout-depense.component';
   declarations: [DepenseComponent, AjoutDepenseComponent],
   imports: [
     CommonModule,
-    DepenseRoutingModule
+    DepenseRoutingModule,
   ]
 })
 export class DepenseModule { }
