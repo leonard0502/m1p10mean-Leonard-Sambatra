@@ -37,6 +37,7 @@ const routes: Routes = [
         path: 'depense',
         loadChildren: () => import('./depense/depense.module').then(m => m.DepenseModule)
       }
+      
     ]
   },
   {

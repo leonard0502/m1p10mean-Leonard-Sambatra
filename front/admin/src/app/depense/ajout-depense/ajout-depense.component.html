@@ -1,86 +1,64 @@
-
-  <main class="main-content  mt-0" >
-    <section>
-      <div class="page-header min-vh-75">
+<!-- <main>
+    <section class="section section-lg pt-lg-0 section-contact-us">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12 d-flex flex-column mx-auto">
-                <h1 style="padding-bottom: 20px;"></h1>
-              <div class="card card-plain mt-8">
-                <div class="card-header  text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Insertion dépense</h3>
-                  
-                </div>
-                <div class="card-body">
-                  <form role="form" (ngSubmit)="OnSubmit()">
-                    <div class="row">
-                      <div class="col">
-                        <label>Intitule</label>
-                          <div class="mb-3">
-                              <input type="text" class="form-control" autocomplete="intitule" placeholder="Exemple: salaire" aria-label="intitule" [(ngModel)]="form.intitule" #nom="ngModel" required>
-                          </div>
-                      </div>
-                      <div class="col">
-                        <label>Mois</label>
-                          <div class="mb-3">
-                              <input type="number" class="form-control" autocomplete="mois" aria-label="mois" [(ngModel)]="form.mois" #nom="ngModel" required>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <label>Année</label>
-                          <div class="mb-3">
-                              <input type="number" class="form-control" autocomplete="annee" aria-label="année" [(ngModel)]="form.annee" #nom="ngModel" required>
-                          </div>
-                      </div>
-                      <div class="col">
-                        <label>Montant</label>
-                          <div class="mb-3">
-                              <input type="number" class="form-control" placeholder="(en Ariary): 200000" autocomplete="montant" aria-label="montant" [(ngModel)]="form.montant" #nom="ngModel" required>
-                          </div>
-                      </div>
-                    </div>
-                  <div style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-info w-100 text-gradient">Inserer</button>
-                  </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+            <div class="row justify-content-center mt--300">
+                <div class="col-lg-8">
+                    <div class="card bg-gradient-secondary shadow">
+                        <form class="card-body p-lg-5" [formGroup]="ficheForm">
+                            <h4 class="mb-1">Insertion dépense</h4>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni
+                                            ni-bullet-list-67"></i></span>
+                                </div>
+                                <input class="form-control"
+                                    placeholder="Intitule" type="text" [(ngModel)]="intitule"
+                                    formControlName="intitule">
+                                <input class="form-control" placeholder="mois" [(ngModel)]="mois" 
+                                    type="text" formControlName="mois">
+                                <input class="form-control" placeholder="annee"  [(ngModel)]="annee"
+                                    type="number" formControlName="annee">
+                                <input class="form-control"
+                                    placeholder="montant" type="number" [(ngModel)]="montant"
+                                    formControlName="montant">
+                            </div>
 
-          <div class="row">
-            <div class="col-md-12 d-flex flex-column mx-auto">
-                <h1 style="padding-bottom: 20px;">Liste des dépenses</h1>
-              <div class="card card-plain mt-8">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Intitule</th>
-                            <th scope="col">Mois</th>
-                            <th scope="col">Année</th>
-                            <th scope="col">Montant</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let liste of depenseListe">
-                            <td> {{liste.intitule}}</td>
-                            <td>{{liste.mois}}</td>
-                            <td>{{liste.annee}}</td>
-                            <td>{{liste.montant}} Ar</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                            <div>
+                                <button type="button" class="btn btn-default
+                                    btn-round btn-block btn-lg"
+                                    (click)="ngSave()">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
             </div>
-            
-          </div>
+            <div class="row">
+                <div class="col-md-12 d-flex flex-column mx-auto">
+                    <h1 style="padding-bottom: 20px;">Liste des dépenses</h1>
+                    <div class="card card-plain mt-8">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Intitule</th>
+                                        <th scope="col">Mois</th>
+                                        <th scope="col">Année</th>
+                                        <th scope="col">Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let liste of depenseListe">
+                                        <td> {{liste.intitule}}</td>
+                                        <td>{{liste.mois}}</td>
+                                        <td>{{liste.annee}}</td>
+                                        <td>{{liste.montant}} Ar</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-  </main>
-  
-  
+</main> -->

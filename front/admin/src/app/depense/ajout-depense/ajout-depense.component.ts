@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DepenseService } from 'src/service/depense.service';
-
+import { DepenseService } from '../../service/depense.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-ajout-depense',
@@ -8,22 +8,28 @@ import { DepenseService } from 'src/service/depense.service';
   styleUrls: ['./ajout-depense.component.scss']
 })
 export class AjoutDepenseComponent implements OnInit {
-  form: any = {
-    intitule: null,
-    montant: null,
-    mois: null,
-    annee: null
-  };
+  ficheForm : FormGroup;
+  in: any = {
+    id: null
+  }
+  mois = [{value:1,title:"Janvier"},"Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"];
   depenseListe: any;
 
-  constructor( private depenseService: DepenseService) { }
+  constructor(private formBuilder : FormBuilder, private depenseService: DepenseService) { }
 
   ngOnInit() {
+    this.ficheForm = this.formBuilder.group({
+      intitule : [null],
+      montant : [null],
+      mois : [null],
+      annee : [null]
+    });
+
     this.getDepense();
   }
 
   OnSubmit(){
-    console.log('donnee entree: ', this.form);
+    console.log('donnee entree: ', this.ficheForm.value);
     // this.depenseService.createDepense(this.form)
     // .subscribe((response) => {
     //   console.log(response);
@@ -36,6 +42,10 @@ export class AjoutDepenseComponent implements OnInit {
     //   this.depenseListe=resultat.data;
     //   console.log(resultat.data);
     // })
+  }
+  getInput() {
+    console.log('donnee entree: ', this.ficheForm.value);
+
   }
 
 
