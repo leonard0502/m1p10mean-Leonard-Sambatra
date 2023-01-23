@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-test',
@@ -7,18 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  bookTitle: string;
+  bookTitle ! : FormGroup;
   huhu: any = {
     intitule: ''
   }
 
-  constructor() { }
+  constructor(private formBuilder : FormBuilder) {
+
+  }
 
   ngOnInit() {
+    this.bookTitle = this.formBuilder.group({
+      text : [null]
+    });
   }
 
   OnClick(){
-    console.log('uhhu: ', this.bookTitle);
+    console.log('uhhu: ', this.bookTitle.value);
   }
 
 }

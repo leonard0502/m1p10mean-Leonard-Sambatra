@@ -1,4 +1,4 @@
-<form (ngSubmit)="OnClick()" #myForm="ngForm">>
-    <input class="form-control" placeholder="bookTitle" type="text" [(ngModel)]="bookTitle">
-    <button type="submit">Valider</button>
+<form  [formGroup]="bookTitle">
+    <input class="form-control" placeholder="bookTitle" type="text" formControlName="text">
+    <button type="submit" (click)="OnClick()">Valider</button>
 </form>

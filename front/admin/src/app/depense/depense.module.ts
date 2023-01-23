@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { DepenseRoutingModule } from './depense-routing.module';
 import { DepenseComponent } from './depense.component';
 import { AjoutDepenseComponent } from './ajout-depense/ajout-depense.component';
-import { FormsModule } from '@angular/forms';
 import { TestComponent } from './test/test.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { TestComponent } from './test/test.component';
   imports: [
     CommonModule,
     DepenseRoutingModule,
-    FormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class DepenseModule { }
