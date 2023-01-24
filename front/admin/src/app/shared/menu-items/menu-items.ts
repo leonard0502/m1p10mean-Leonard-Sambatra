@@ -45,6 +45,19 @@ const MENUITEMS = [
         state: 'depense',
         short_label: 'D',
         name: 'Depense',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'ajout',
+            name: 'Ajout Dépense'
+          }
+        ]
+      },
+      {
+        state: 'voiture',
+        short_label: 'D',
+        name: 'Voiture',
         type: 'link',
         icon: 'ti-home'
       },
