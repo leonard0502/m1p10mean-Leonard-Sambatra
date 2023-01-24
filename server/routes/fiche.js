@@ -59,6 +59,41 @@ ficheRoutes.post("/creerFiche",async  (req, res) => {
     });
 });
 
+/*
+  Ajout reparation
+*/
+ficheRoutes.put("/ajoutReparation/:idFiche", (req, res) => {
+  let { intitule, prix } = req.body;
+  let reparation = {
+    intitule: intitule,
+    dateDebut: new Date(),
+    dateFin: null,
+    avancement: 0,
+    prix : prix
+  };
+  var conditions = { _id: ObjectId(req.params.idFiche) }
+  , update = { $addToSet: {
+    reparation : reparation
+  }};
+  Reservation.findByIdAndUpdate(conditions, update , { new : true, upsert: true}
+    ).exec().then((result) => {
+      if (result.length > 0) {
+        res.json(result);
+      } else {
+        res.json({
+          status: "ECHEC",
+          message: "Aucun fiche",
+        });
+      }
+    }
+  ).catch((error) => {
+    res.json({
+      status: "ECHEC",
+      message: `Une erreur s'est produit lors de l'obtention des fiches ${error.message}!`,
+    });
+  });
+});
+
 ficheRoutes.get("/getFiche", (req, res) => {
   let query = [{ "_id":{$ne:null} }];
   if ( req?.query?.idUser ) {

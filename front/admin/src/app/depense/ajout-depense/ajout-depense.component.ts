@@ -35,6 +35,7 @@ export class AjoutDepenseComponent implements OnInit {
     this.depenseService.createDepense(this.ficheForm.value)
     .subscribe((response) => {
       console.log(response);
+      this.getDepense();
     })
   }
 

@@ -58,23 +58,16 @@ const MENUITEMS = [
         state: 'voiture',
         short_label: 'D',
         name: 'Voiture',
-        type: 'link',
-        icon: 'ti-home'
-      },
-      {
-        state: 'basic',
-        short_label: 'B',
-        name: 'Basic Components',
         type: 'sub',
-        icon: 'ti-layout-grid2-alt',
+        icon: 'ti-home',
         children: [
           {
-            state: 'button',
-            name: 'Button'
+            state: 'ajout-reparation',
+            name: 'Ajout-réparation'
           },
           {
-            state: 'typography',
-            name: 'Typography'
+            state: 'historique-reparation',
+            name: 'Historique-réparation'
           }
         ]
       },

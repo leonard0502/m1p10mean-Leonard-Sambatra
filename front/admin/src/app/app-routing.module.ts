@@ -36,7 +36,7 @@ const routes: Routes = [
       }, {
         path: 'depense',
         loadChildren: () => import('./depense/depense.module').then(m => m.DepenseModule)
-      }
+      }, { path: 'voiture', loadChildren: () => import('./voiture/voiture.module').then(m => m.VoitureModule) }
       
     ]
   },
@@ -49,8 +49,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
       }
     ]
-  },
-  { path: 'voiture', loadChildren: () => import('./voiture/voiture.module').then(m => m.VoitureModule) }
+  }
 ];
 
 @NgModule({

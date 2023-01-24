@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   back : 'http://localhost:333',
-  Depense_base_url : 'http://localhost:333/depense'
+  Depense_base_url : 'http://localhost:333/depense',
+  Voiture_base_url : 'http://localhost:333/voiture',
 };

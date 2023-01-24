@@ -49,7 +49,7 @@ voitureRoutes.get("/", (req, res) => {
     });
 });
 
-voitureRoutes.get("/getAllRepParVoiture", (req,res) => {
+voitureRoutes.get("/getAllRepParVoiture/:idVoiture", (req,res) => {
     let reparation = [];
     Fiche.find({idVoiture : ObjectId(req.query.idVoiture)})
       .then((result) => {
