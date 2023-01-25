@@ -2,8 +2,9 @@ const express = require("express");
 
 const depenseRoutes = express.Router();
 const Depense = require("../models/Depense");
+const auth = require("./../middleware/auth");
 
-depenseRoutes.post("/creerDepense", (req, res) => {
+depenseRoutes.post("/creerDepense", auth, (req, res) => {
   let { intitule, montant, mois, annee, dateDepense } = req.body;
   let date = new Date(dateDepense);
   mois = date.getMonth()+1;
