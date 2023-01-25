@@ -36,7 +36,8 @@ const routes: Routes = [
       }, {
         path: 'depense',
         loadChildren: () => import('./depense/depense.module').then(m => m.DepenseModule)
-      }, { path: 'voiture', loadChildren: () => import('./voiture/voiture.module').then(m => m.VoitureModule) }
+      }, { path: 'voiture', loadChildren: () => import('./voiture/voiture.module').then(m => m.VoitureModule) 
+      }, { path: 'fiche', loadChildren: () => import('./fiche/fiche.module').then(m => m.FicheModule) }
       
     ]
   },

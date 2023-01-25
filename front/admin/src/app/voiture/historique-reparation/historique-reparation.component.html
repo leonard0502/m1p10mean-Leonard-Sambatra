@@ -1,8 +1,8 @@
 <main>
     <section class="section section-lg pt-lg-0 section-contact-us">
         <div class="container">
-            <div class="row justify-content-center mt--300">
-                <div class="col-lg-8">
+            <div class="row ">
+                <div class="col-md-12 d-flex flex-column mx-auto">
                     <div class="card bg-gradient-secondary shadow">
                         <form class="card-body p-lg-5" [formGroup]="ficheForm">
                             <h4 class="mb-1">Choisir voiture :</h4>
@@ -11,7 +11,7 @@
                                     <label>Numéro Voiture</label>
                                     <div class="mb-3">
                                         <select class="form-control" formControlName="numero" [(ngModel)]="numero">
-                                            <option *ngFor="let vehicule of listVehicule | async" value={{vehicule._id}} >{{vehicule.matricule+' '+vehicule.marque}}</option>
+                                            <option *ngFor="let vehicule of listVehicule" value={{vehicule._id}} >{{vehicule.matricule+' '+vehicule.marque}}</option>
                                           </select>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let liste of reparationListe">
+                                    <tr *ngFor="let liste of listReparation">
                                         <td> {{liste.intitule}}</td>
                                         <td>{{liste.prix}}</td>
                                         <td>{{liste.dateDebut}}</td>

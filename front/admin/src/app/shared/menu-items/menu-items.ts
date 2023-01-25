@@ -35,9 +35,9 @@ const MENUITEMS = [
     label: 'Navigation',
     main: [
       {
-        state: 'dashboard',
+        state: 'fiche',
         short_label: 'D',
-        name: 'Dashboard',
+        name: 'Fiche',
         type: 'link',
         icon: 'ti-home'
       },
@@ -68,6 +68,10 @@ const MENUITEMS = [
           {
             state: 'historique-reparation',
             name: 'Historique-réparation'
+          },
+          {
+            state: 'facture',
+            name: 'Facture'
           }
         ]
       },

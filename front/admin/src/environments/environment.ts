@@ -8,4 +8,5 @@ export const environment = {
   back : 'http://localhost:333',
   Depense_base_url : 'http://localhost:333/depense',
   Voiture_base_url : 'http://localhost:333/voiture',
+  Fiche_base_url : 'http://localhost:333/fiche'
 };

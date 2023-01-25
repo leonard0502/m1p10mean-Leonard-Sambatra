@@ -1,0 +1,33 @@
+<main>
+    <section class="section section-lg pt-lg-0 section-contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 d-flex flex-column mx-auto">
+                    <h1 style="padding-bottom: 20px;">Facture réparation voiture n°</h1>
+                    <div class="card card-plain mt-8">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Intitule</th>
+                                        <th scope="col">Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let liste of listReparation">
+                                        <td> {{liste.intitule}}</td>
+                                        <td>{{liste.prix}} Ar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td> Ar</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
