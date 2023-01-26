@@ -27,7 +27,6 @@ ficheRoutes.post("/creerFiche",async  (req, res) => {
       });
     })
     .catch((err) => {
-      console.log("Error////",err.message);
       res.json({
         status: "ECHEC",
         message: "Une erreur s'est produit lors de la création de la Fiche! "+err.message,
