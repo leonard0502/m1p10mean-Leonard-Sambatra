@@ -35,6 +35,7 @@ ficheRoutes.post("/creerFiche",async  (req, res) => {
     });
 });
 
+
 /*
   Ajout reparation
 */
@@ -70,6 +71,35 @@ ficheRoutes.put("/ajoutReparation/:idFiche", (req, res) => {
   });
 });
 
+/*
+ * Modifier etat fiche
+*/
+ficheRoutes.put("/:id", (req, res) => {
+  let { etat} = req.body;
+
+  var conditions = { _id: ObjectId(req.params.id) }
+  , update = { $set: {
+    etat : Number(etat)
+  }};
+  Fiche.findByIdAndUpdate(conditions, update , { new : true, upsert: true}
+    ).exec().then((result) => {
+      if (result) {
+        res.json(result);
+      } else {
+        res.json({
+          status: "ECHEC",
+          message: "Aucun fiche",
+        });
+      }
+    }
+  ).catch((error) => {
+    res.json({
+      status: "ECHEC",
+      message: `Une erreur s'est produit lors de l'obtention des fiches ${error.message}!`,
+    });
+  });
+});
+
 ficheRoutes.get("/getFiche", (req, res) => {
   let query = [{ "_id":{$ne:null} }];
   if ( req?.query?.idUser ) {
@@ -78,9 +108,9 @@ ficheRoutes.get("/getFiche", (req, res) => {
   if ( req?.query?.etat ) {
     query.push({ etat : { $lt : req?.query?.etat}});
   }
-  Fiche.find({
-  $and: [...query],
-  }).populate('idVoiture')
+  Fiche.find({$and: [...query],})
+  .populate('idVoiture')
+    .populate('idUser')
     .sort({ "dateFiche": 1 })
     .then((result) => {
       if (result.length > 0) {
@@ -99,6 +129,34 @@ ficheRoutes.get("/getFiche", (req, res) => {
       });
     });
 });
+
+ficheRoutes.get("/etat/:etat", (req, res) => {
+  let query = [{ "_id":{$ne:null} }];
+  if ( req?.params?.etat ) {
+    query.push({ etat : { $eq : req?.params?.etat}});
+  }
+  Fiche.find({$and: [...query],})
+  .populate('idVoiture')
+    .populate('idUser')
+    .sort({ "dateFiche": 1 })
+    .then((result) => {
+      if (result.length > 0) {
+        res.json(result);
+      } else {
+        res.json({
+          status: "ECHEC",
+          message: "Aucun fiche",
+        });
+      }
+    })
+    .catch((error) => {
+      res.json({
+        status: "ECHEC",
+        message: `Une erreur s'est produit lors de l'obtention des fiches ${error.message}!`,
+      });
+    });
+});
+
 ficheRoutes.get("/getFicheById", (req, res) => {
     Fiche.find({_id : ObjectId(req.query.id)})
     .populate("idVoiture")

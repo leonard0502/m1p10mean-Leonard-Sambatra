@@ -13,6 +13,8 @@ import { AuthComponent } from './layout/auth/auth.component';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthInterceptorProvider } from './service/auth.service';
+import { FicheGarageComponent } from './fiche/fiche-garage/fiche-garage.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { AuthInterceptorProvider } from './service/auth.service';
     AdminComponent,
     BreadcrumbsComponent,
     TitleComponent,
-    AuthComponent
+    AuthComponent,
+    FicheGarageComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { AuthInterceptorProvider } from './service/auth.service';
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [AuthInterceptorProvider],

@@ -42,6 +42,13 @@ const MENUITEMS = [
         icon: 'ti-home'
       },
       {
+        state: 'garage',
+        short_label: 'D',
+        name: 'Garage',
+        type: 'link',
+        icon: 'ti-home'
+      },
+      {
         state: 'depense',
         short_label: 'D',
         name: 'Depense',
