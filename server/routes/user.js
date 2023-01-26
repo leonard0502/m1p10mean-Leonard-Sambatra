@@ -52,13 +52,13 @@ userRoutes.get("/login", async (req, res) => {
   }
 });
 
-userRoutes.get("/inscription", async (req, res) => {
+userRoutes.post("/inscription", async (req, res) => {
   const {
-      nom,prenom,mail,mdp,contact
-  } = req.query;
+      nom,prenom,email,mdp,contact
+  } = req.body;
   try {
       const existClient = await User.findOne({
-          mail: mail
+          email: email
       });
       if (existClient) {
           return res.status(200).json({
@@ -70,17 +70,17 @@ userRoutes.get("/inscription", async (req, res) => {
       new User({
           nom: nom,
           prenom: prenom,
-          mail: mail,
+          email: email,
           mdp: hasshedPassord,
           contact: contact,
-          role: 'c'
+          type: 'c'
       }).save().then(function (user) {
-          console.log("Envoyer mail");
+          console.log(user);
           const sujet ="Inscription Garage";
-            const text ="Bonjour Madame/Monsieur,"+nom+" "+prenom+".\n Vous êtes incrit dans notre garage!!"
-          mailService.sendEmail(sujet, text,mail);
+            const text ="Bonjour Madame/Monsieur,"+user.nom+" "+user.prenom+".\n Vous êtes incrit dans notre garage!!"
+          mailService.sendEmail(sujet, text,user.email);
           const token = jwt.sign({
-              mail: user.mail,
+              email: user.email,
               id: user._id
           }, SECRET_KEY, {
               expiresIn: maxAge
@@ -94,7 +94,7 @@ userRoutes.get("/inscription", async (req, res) => {
               prenom: user.prenom,
               mail: user.mail,
               token: token,
-              role
+              type:user.type
 
           })
       });

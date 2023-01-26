@@ -1,15 +1,11 @@
 const express = require("express");
-const ObjectId = require("mongodb").ObjectId;
-const ficheRoutes = express.Router();
 const nodemailer = require("nodemailer");
-const Fiche = require("../models/Fiche");
-const Voiture = require("../models/Voiture");
 
 let transporter = nodemailer.createTransport({
   pool: true,
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.AUTH_EMAIL,
     pass: process.env.AUTH_PASS,
@@ -28,8 +24,8 @@ transporter.verify((err, success) => {
   }
 });
 
-const sendEmail = ({ sujet,text,email}, res) => {
-    const mailOptions = {
+const sendEmail = ( sujet,text,email, res) => {
+  const mailOptions = {
       from: process.env.AUTH_EMAIL,
       to: email,
       subject: sujet,
@@ -41,6 +37,7 @@ const sendEmail = ({ sujet,text,email}, res) => {
           transporter
             .sendMail(mailOptions)
             .then(() => {
+              console.log("fini");
               res.json({
                 status: "EN COURS"
               });

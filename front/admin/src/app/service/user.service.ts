@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 /**
  * Service accès au données DepenseService
  */
-export class VoitureService {
+export class UserService {
  
   constructor(private http : HttpClient){
 
@@ -21,8 +21,9 @@ export class VoitureService {
     let url = environment.User_base_url+'/login';
     return this.http.get(url,form);
    }
-   incription(form : any) {
+   inscription(form : any) {
     let url = environment.User_base_url+'/inscription';
-    return this.http.get(url,form);
+    console.log(form);
+    return this.http.post(url,form);
    }
 }
