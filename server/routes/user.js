@@ -2,27 +2,112 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const userRoutes = express.Router();
 const User = require("../models/User");
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+const SECRET_KEY = "NOTESAPI"; //cle de securite ze tina atao fa tsy votery io NOTES... io
+const jwt = require("jsonwebtoken");
+const mailService = require("./../service/mail");
 
-userRoutes.get("/verifier", async (req, res) => {
+userRoutes.get("/login", async (req, res) => {
+  console.log(req.body.mdp);
   let {email, mdp } = req.query;
-  const user = await User.findOne({ email: email });
-  if (user) {
-    const validPassword = await bcrypt.compare(mdp, user.mdp);
-    if (validPassword) {
-      res.json(user);
-    } else {
-      res.json({
-        status: "Erreur",
-        message: "Votre mot de pass ou/et email est incorrect!",
+  try {
+      const existClient = await User.findOne({
+          email: email
       });
-    }
-  } else {
-    res.json({
-      status: "Erreur",
-      message: "Votre mot de pass ou/et email est incorrect!!",
-    });
+      if (!existClient) {
+          return res.status(200).json({
+              message: "Utilisateur introuvable"
+          });
+      }
+      const verifMdp = await bcrypt.compare(mdp, existClient.email);
+      if (!verifMdp) {
+          return res.status(200).json({
+              message: "mots de passe ou mail incorrecte"
+          });
+      }
+      const token = jwt.sign({
+          email: existClient.email,
+          id: existClient._id,
+          date: new Date()
+      }, SECRET_KEY, {
+          expiresIn: maxAge
+      });
+      res.cookie('jwt', token, {
+          httpOnly: false,
+          maxAge: maxAge
+      });
+      res.status(201).json({
+          nom: existClient.nom,
+          prenom: existClient.prenom,
+          email: existClient.email,
+          token: token,
+          role: existClient.role
+      });
+  } catch (error) {
+      console.log(error);
+      res.status(200).json({
+          message: "Erreur dans votre code de connexion",
+          error
+      });
   }
-  });
+});
+
+userRoutes.get("/inscription", async (req, res) => {
+  const {
+      nom,prenom,mail,mdp,contact
+  } = req.query;
+  try {
+      const existClient = await User.findOne({
+          mail: mail
+      });
+      if (existClient) {
+          return res.status(200).json({
+              message: "address e-mail déjà utilisé"
+          });
+      }
+      const hasshedPassord = await bcrypt.hash(mdp, 10);
+      // console.log(req.body);
+      new User({
+          nom: nom,
+          prenom: prenom,
+          mail: mail,
+          mdp: hasshedPassord,
+          contact: contact,
+          role: 'c'
+      }).save().then(function (user) {
+          console.log("Envoyer mail");
+          const sujet ="Inscription Garage";
+            const text ="Bonjour Madame/Monsieur,"+nom+" "+prenom+".\n Vous êtes incrit dans notre garage!!"
+          mailService.sendEmail(sujet, text,mail);
+          const token = jwt.sign({
+              mail: user.mail,
+              id: user._id
+          }, SECRET_KEY, {
+              expiresIn: maxAge
+          });
+          res.cookie('jwt', token, {
+              httpOnly: true,
+              maxAge
+          });
+          res.status(201).json({
+              nom: user.nom,
+              prenom: user.prenom,
+              mail: user.mail,
+              token: token,
+              role
+
+          })
+      });
+
+  } catch (error) {
+      console.log(error);
+      res.status(200).json({
+          message: "Erreur d'inscription",
+          error
+      });
+  }
+});
+
 
 userRoutes.post("/creerUser", (req, res) => {
     let { type, nom, prenom, email, mdp, contact } = req.body;

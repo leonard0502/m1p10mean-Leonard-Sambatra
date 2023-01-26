@@ -12,6 +12,7 @@ import { TitleComponent } from './layout/admin/title/title.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AuthInterceptorProvider } from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
