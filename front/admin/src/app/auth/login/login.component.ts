@@ -24,21 +24,21 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     console.log('donnee entree: ', this.loginForm.value);
     this.userService.login(this.loginForm.value)
-    .subscribe((response) => {
+    .subscribe((response : any) => {
       console.log(response);
       if(response) {
-        // localStorage.setItem("tokenUser", response[0].token);
-        // if(response[0].type=='f'){
-        //   this.router.navigate(['Client/depot_voiture']);
+        localStorage.setItem("tokenUser", response.token);
+        if(response.type=='c'){
+          this.router.navigate(['']);
         // }else if(response[0].role.intitule=='atelier'){
         //   this.router.navigate(['Atelier/reception_voiture']);
         // }else if(response[0].role.intitule=='financier'){
         //   this.router.navigate(['Financier/liste_paiement']);
         // }else{
         //   this.router.navigate(['']);
-        // }
+        }
       }else {
-        this.router.navigate(['']);
+        this.router.navigate(['auth']);
       }
       
      

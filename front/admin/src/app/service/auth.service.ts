@@ -25,7 +25,7 @@ export class AuthService implements HttpInterceptor {
     // });
     let jwtToken = request.clone({
       setHeaders: {
-        token: 'token ' +localStorage.getItem("token_user")
+        token: 'token ' +localStorage.getItem("tokenUser")
       }
     })
     return next.handle(jwtToken);

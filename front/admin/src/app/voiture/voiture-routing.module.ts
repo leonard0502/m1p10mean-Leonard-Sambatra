@@ -8,7 +8,7 @@ import { FactureComponent } from './facture/facture.component';
 import { StatistiqueReparationComponent } from './statistique-reparation/statistique-reparation.component';
 
 const routes: Routes = [{ path: '', component: VoitureComponent }, 
-{ path: 'ajout-reparation', component: AjoutReparationComponent }, 
+{ path: 'ajout-reparation/:id', component: AjoutReparationComponent }, 
 { path: 'facture', component: FactureComponent }, 
 { path: 'statistique-reparation', component: StatistiqueReparationComponent }, 
 { path: 'historique-reparation', component: HistoriqueReparationComponent }];

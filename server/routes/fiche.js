@@ -38,8 +38,9 @@ ficheRoutes.post("/creerFiche",async  (req, res) => {
 /*
   Ajout reparation
 */
-ficheRoutes.put("/ajoutReparation/:idFiche", (req, res) => {
+ficheRoutes.post("/ajoutReparation/:idFiche", (req, res) => {
   let { intitule, prix } = req.body;
+  console.log(req.body);
   let reparation = {
     intitule: intitule,
     dateDebut: new Date(),
@@ -51,7 +52,7 @@ ficheRoutes.put("/ajoutReparation/:idFiche", (req, res) => {
   , update = { $addToSet: {
     reparation : reparation
   }};
-  Reservation.findByIdAndUpdate(conditions, update , { new : true, upsert: true}
+  Fiche.findByIdAndUpdate(conditions, update , { new : true, upsert: true}
     ).exec().then((result) => {
       if (result.length > 0) {
         res.json(result);
@@ -128,36 +129,8 @@ ficheRoutes.get("/getFiche", (req, res) => {
       });
     });
 });
-
-ficheRoutes.get("/etat/:etat", (req, res) => {
-  let query = [{ "_id":{$ne:null} }];
-  if ( req?.params?.etat ) {
-    query.push({ etat : { $eq : req?.params?.etat}});
-  }
-  Fiche.find({$and: [...query],})
-  .populate('idVoiture')
-    .populate('idUser')
-    .sort({ "dateFiche": 1 })
-    .then((result) => {
-      if (result.length > 0) {
-        res.json(result);
-      } else {
-        res.json({
-          status: "ECHEC",
-          message: "Aucun fiche",
-        });
-      }
-    })
-    .catch((error) => {
-      res.json({
-        status: "ECHEC",
-        message: `Une erreur s'est produit lors de l'obtention des fiches ${error.message}!`,
-      });
-    });
-});
-
-ficheRoutes.get("/getFicheById", (req, res) => {
-    Fiche.find({_id : ObjectId(req.query.id)})
+ficheRoutes.get("/getFicheById/:id", (req, res) => {
+    Fiche.find({_id : ObjectId(req.params.id)})
     .populate("idVoiture")
     .populate("idUser")
       .then((result) => {
@@ -174,6 +147,32 @@ ficheRoutes.get("/getFicheById", (req, res) => {
         res.json({
           status: "ECHEC",
           message: "Une erreur s'est produit lors de l'obtention des fiches!",
+        });
+      });
+  });
+
+  ficheRoutes.get("/getAllRepParVoiture/:idFiche", async (req,res) => {
+    let reparation = [];
+      await Fiche.find({_id : ObjectId(req.params.idFiche)})
+      .then((result) => {
+        if (result.length > 0) {
+          result.forEach((resu) => {
+                resu.reparation.forEach((rep) => {
+                    reparation.push(rep);
+                });
+            });
+            res.json(reparation);
+        } else {
+          res.json({
+            status: "ECHEC",
+            message: "Cette voiture a aucune Reparation ",
+          });
+        }
+      })
+      .catch(() => {
+        res.json({
+          status: "ECHEC",
+          message: "Une erreur s'est produit lors de l'obtention des reoaration de cette voiture!",
         });
       });
   });

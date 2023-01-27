@@ -19,7 +19,7 @@ export class UserService {
 
   login(form : any) {
     let url = environment.User_base_url+'/login';
-    return this.http.get(url,form);
+    return this.http.post(url,form);
    }
    inscription(form : any) {
     let url = environment.User_base_url+'/inscription';

@@ -26,10 +26,10 @@ export class InscriptionComponent implements OnInit {
   onSubmit(){
     console.log('donnee: ', this.inscriptionForm.value);
     this.userService.inscription(this.inscriptionForm.value)
-    .subscribe((response) => {
+    .subscribe((response:any) => {
       console.log(response);
       if(response) {
-        localStorage.setItem("tokenUser", response[0].token);
+        localStorage.setItem("tokenUser", response.token);
         // if(response[0].type=='f'){
         //   this.router.navigate(['Client/depot_voiture']);
         // }else if(response[0].role.intitule=='atelier'){

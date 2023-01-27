@@ -18,11 +18,11 @@ export class VoitureService {
   }
 
   ajoutReparation(form : any, id :any) {
-    let url = environment.Depense_base_url+'/ajoutReparation/'+id;
+    let url = environment.Fiche_base_url+'/ajoutReparation/'+id;
     return this.http.post(url,form);
    }
    getReparationParIdFiche(idFiche : string) {
-    let url = environment.Depense_base_url+'/getReparationParIdFiche/'+idFiche;
+    let url = environment.Fiche_base_url+'/getAllRepParVoiture/'+idFiche;
     return this.http.get(url);
    }
    getListeVoiture(){

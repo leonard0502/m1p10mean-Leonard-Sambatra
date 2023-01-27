@@ -7,9 +7,9 @@ const SECRET_KEY = "NOTESAPI"; //cle de securite ze tina atao fa tsy votery io N
 const jwt = require("jsonwebtoken");
 const mailService = require("./../service/mail");
 
-userRoutes.get("/login", async (req, res) => {
-  console.log(req.body.mdp);
-  let {email, mdp } = req.query;
+userRoutes.post("/login", async (req, res) => {
+
+  let {email, mdp } = req.body;
   try {
       const existClient = await User.findOne({
           email: email
@@ -19,7 +19,8 @@ userRoutes.get("/login", async (req, res) => {
               message: "Utilisateur introuvable"
           });
       }
-      const verifMdp = await bcrypt.compare(mdp, existClient.email);
+      const verifMdp = await bcrypt.compare(mdp, existClient.mdp);
+      console.log(verifMdp);
       if (!verifMdp) {
           return res.status(200).json({
               message: "mots de passe ou mail incorrecte"
@@ -41,7 +42,7 @@ userRoutes.get("/login", async (req, res) => {
           prenom: existClient.prenom,
           email: existClient.email,
           token: token,
-          role: existClient.role
+          type: existClient.type
       });
   } catch (error) {
       console.log(error);
@@ -65,8 +66,10 @@ userRoutes.post("/inscription", async (req, res) => {
               message: "address e-mail déjà utilisé"
           });
       }
-      const hasshedPassord = await bcrypt.hash(mdp, 10);
-      // console.log(req.body);
+      console.log(mdp);
+      const salt = bcrypt.genSaltSync(10);
+    const hasshedPassord = bcrypt.hashSync(mdp, salt);
+      console.log(hasshedPassord);
       new User({
           nom: nom,
           prenom: prenom,
@@ -75,10 +78,9 @@ userRoutes.post("/inscription", async (req, res) => {
           contact: contact,
           type: 'c'
       }).save().then(function (user) {
-          console.log(user);
           const sujet ="Inscription Garage";
             const text ="Bonjour Madame/Monsieur,"+user.nom+" "+user.prenom+".\n Vous êtes incrit dans notre garage!!"
-          mailService.sendEmail(sujet, text,user.email);
+        //   mailService.sendEmail(sujet, text,user.email);
           const token = jwt.sign({
               email: user.email,
               id: user._id
@@ -92,7 +94,7 @@ userRoutes.post("/inscription", async (req, res) => {
           res.status(201).json({
               nom: user.nom,
               prenom: user.prenom,
-              mail: user.mail,
+              mail: user.email,
               token: token,
               type:user.type
 

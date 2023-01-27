@@ -10,18 +10,10 @@ let transporter = nodemailer.createTransport({
     user: process.env.AUTH_EMAIL,
     pass: process.env.AUTH_PASS,
   },
-  tls: {
-    rejectUnauthorized: false
-  } 
+  // tls: {
+  //   rejectUnauthorized: false
+  // } 
 
-});
-transporter.verify((err, success) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Ready for messages");
-    console.log(success);
-  }
 });
 
 const sendEmail = ( sujet,text,email, res) => {
@@ -44,10 +36,10 @@ const sendEmail = ( sujet,text,email, res) => {
             })
             .catch((err) => {
               console.log(err); 
-              res.json({
-                status: "ECHEC",
-                message: "Erreur de hachage des données email!",
-              });
+              // res.json({
+              //   status: "ECHEC",
+              //   message: "Erreur de hachage des données email!",
+              // });
             });
   };
 
