@@ -10,28 +10,28 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Voiture</th>
-                                        <th scope="col">Client</th>
+                                        <!-- <th scope="col">Client</th> -->
                                         <th scope="col">Etat</th>
                                         <th scope="col">Etat Paiement</th>
-                                        <th scope="col">Date dfiche</th>
+                                        <th scope="col">Date fiche</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let liste of ficheListe">
+                                    <tr *ngFor="let liste of ficheListe">   
                                         <td> {{liste.idVoiture.matricule}} | {{liste.idVoiture.marque}}</td>
-                                        <td>{{liste.idUser.nom}} {{liste.idUser.prenom}}</td>
+                                        <!-- <td>{{liste.idUser.nom}} {{liste.idUser.prenom}}</td> -->
                                         <td>{{liste.etat}}</td>
                                         <div  *ngIf="liste.etatPaie==0;then nonPayer"></div>
                                         <ng-template #nonPayer>
                                             <td class="text-success">Non Payer</td>
                                         </ng-template>
-                                        <div  *ngIf="liste.etat==1;then paier"></div>
+                                        <div  *ngIf="liste.etatPaie==1;then payer"></div>
                                         <ng-template #payer>
                                             <td class="text-success">Payé</td>
                                         </ng-template>
-                                        <!-- <td>{{liste.etatPaie}}</td> -->
-                                        <td>{{liste.dateFiche | date: 'à HH:mm, le d MMMM yyyy'}}</td>
-                                        <td><a href="voiture/ajout-reparation/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Réparation</a></td>
+                                        <td>{{liste.dateFiche | date: 'le d MMMM yyyy à HH:mm '}}</td>
+                                        <td><a href="voiture/ajout-reparation/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir réparation</a></td>
+                                        <td><a href="voiture/facture/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir facture</a></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -50,9 +50,22 @@
                                     <tr *ngFor="let liste of reparationListe">
                                         <td> {{liste.intitule}}</td>
                                         <td>{{liste.prix}}</td>
-                                        <td>{{liste.dateDebut | date: 'à HH:mm, le d MMMM yyyy'}}</td>
-                                        <td>0</td>
-                                        <td>Débuter/Encours/Terminer</td>
+                                        <td>{{liste.dateDebut | date: 'le d MMMM yyyy à HH:mm '</td>
+                                        <td><div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [ngStyle]="{'width.%' : liste.avancement*50}"></div>
+                                        </div></td>
+                                        <div  *ngIf="liste.avancement==0;then debuter"></div>
+                                        <ng-template #debuter>
+                                            <td class="text-success"><button type="button" class="btn btn-default" (click)="ngAvancer(1,liste._id)">Débuter</button></td>
+                                        </ng-template>
+                                        <div  *ngIf="liste.avancement==1;then terminer"></div>
+                                        <ng-template #terminer>
+                                            <td class="text-success"><button type="button" class="btn btn-default" (click)="ngAvancer(2,liste._id)">Terminer</button></td>
+                                        </ng-template>
+                                        <div  *ngIf="liste.avancement==2;then fin"></div>
+                                        <ng-template #fin>
+                                            <td>C'est déjà terminer {{liste.dateFin | date: 'le d MMMM yyyy à HH:mm '</td>
+                                        </ng-template>
                                     </tr>
                                 </tbody>
                             </table>

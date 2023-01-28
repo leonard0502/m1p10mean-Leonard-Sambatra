@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+// import { environment } from "../../environments/environment.prod";
 import { environment } from "../../environments/environment";
 import { Observable } from "rxjs";
 import { Injectable } from '@angular/core';
@@ -11,6 +12,14 @@ export class FicheService {
   constructor(private http : HttpClient){
 
   }
+  getReparationParIdFiche(idFiche : string) {
+    let url = environment.Fiche_base_url+'/getAllRepParVoiture/'+idFiche;
+    return this.http.get(url);
+   }
+  avancerReparation(idFiche : string, avance : number, idReparation : string) {
+    let url = environment.Fiche_base_url+'/avancerReparation/'+idFiche;
+    return this.http.put(url, {avance,idReparation});
+   }
 
    getFiche() {
     let url = environment.Fiche_base_url+'/getFiche';

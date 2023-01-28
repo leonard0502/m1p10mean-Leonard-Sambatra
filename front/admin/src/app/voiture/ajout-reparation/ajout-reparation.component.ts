@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { VoitureService } from '../../service/voiture.service';
 import { ActivatedRoute } from '@angular/router';
+import { FicheService } from '../../service/fiche.service';
 
 @Component({
   selector: 'app-ajout-reparation',
@@ -13,7 +14,7 @@ export class AjoutReparationComponent implements OnInit {
   idFiche !: string
   ficheForm : FormGroup;
   reparationListe: any[];
-  constructor(private formBuilder : FormBuilder, private voitureService : VoitureService, private activatedRoute : ActivatedRoute) { }
+  constructor(private formBuilder : FormBuilder, private voitureService : VoitureService, private ficheService : FicheService, private activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
     this.ficheForm = this.formBuilder.group({
@@ -38,6 +39,14 @@ export class AjoutReparationComponent implements OnInit {
     .subscribe((response) => {
       this.getReparationParIdFiche();
       console.log(response);
+    })
+  }
+  ngAvancer(avance :number,IdReparation : string) {
+    console.log('donne', avance, IdReparation);
+    this.ficheService.avancerReparation(this.idFiche,avance,IdReparation)
+    .subscribe((response) => {
+      console.log(response);
+      this.getReparationParIdFiche();
     })
   }
 

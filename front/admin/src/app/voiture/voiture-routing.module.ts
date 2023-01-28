@@ -9,7 +9,7 @@ import { StatistiqueReparationComponent } from './statistique-reparation/statist
 
 const routes: Routes = [{ path: '', component: VoitureComponent }, 
 { path: 'ajout-reparation/:id', component: AjoutReparationComponent }, 
-{ path: 'facture', component: FactureComponent }, 
+{ path: 'facture/:id', component: FactureComponent }, 
 { path: 'statistique-reparation', component: StatistiqueReparationComponent }, 
 { path: 'historique-reparation', component: HistoriqueReparationComponent }];
 

@@ -100,6 +100,31 @@ ficheRoutes.put("/:id", (req, res) => {
   });
 });
 
+ficheRoutes.put("/avancerReparation/:id", (req, res) => {
+  let {idReparation, avance} = req.body;
+  console.log(idReparation);
+  console.log(req.body);
+  let date = null;
+  if(avance==2) {
+    date = new Date();
+  }
+  Fiche.findOneAndUpdate(
+    { _id: ObjectId(req.params.id), "reparation._id": ObjectId(idReparation) },
+    {$set: {"reparation.$.avancement": avance, "reparation.$.dateFin" : date} },
+    {new : true}
+    ).exec().then((result) => {
+      if (result) {
+        res.json(result);
+      } else {
+        res.send("err");
+      }
+    }
+  ).catch((error) => {
+    console.log(error);
+    res.send(error);  
+  });
+});
+
 ficheRoutes.get("/getFiche", (req, res) => {
   let query = [{ "_id":{$ne:null} }];
   if ( req?.query?.idUser ) {
@@ -152,6 +177,7 @@ ficheRoutes.get("/getFicheById/:id", (req, res) => {
   });
 
   ficheRoutes.get("/getAllRepParVoiture/:idFiche", async (req,res) => {
+    console.log(req.params.idFiche);
     let reparation = [];
       await Fiche.find({_id : ObjectId(req.params.idFiche)})
       .then((result) => {
