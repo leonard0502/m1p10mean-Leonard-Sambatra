@@ -46,7 +46,13 @@
   <!-- email Sent Start -->
   <div class="col-md-12">
     <app-card [title]="'Chiffre d\'affaire pour ce mois-ci'" [cardClass]="'email-sent-card'" [classHeader]="true">
-      <span class="code-header"><span class="text-muted">Groupé par jours.</span></span>
+      <select [(ngModel)]="indicemois" (change)="getSelectedMonth()">
+        <option [ngValue]="indicemois" selected>{{monthact[indicemois]}}</option>
+        <option  *ngFor="let item of monthact; index as i" [ngValue]="i">{{item}}</option>
+      </select>
+      <span class="code-header"><span class="text-muted">Groupé par jours.</span>
+      <span class="text-danger" *ngIf="noDataDay" >Aucun chiffre d'affaire</span>
+    </span>
       <div id="email-sent" style="max-width:100%;height:400px;"></div>
     </app-card>
   </div>

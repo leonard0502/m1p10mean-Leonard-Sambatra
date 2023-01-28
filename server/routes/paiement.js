@@ -96,11 +96,18 @@ paiementRoutes.get("/years", (req, res) => {
  * Get stat par jours
  */
 paiementRoutes.get("/days/:month/:year", (req, res) => {
+  const from = new Date(Date.UTC(Number(req.params.year), Number(req.params.month) - 1 , 1)); // "2019-12-01T00:00:00.000Z"
+  const to = new Date(Date.UTC(Number(req.params.year), Number(req.params.month), 1)); // "2020-01-01T00:00:00.000Z"
   Paiement.aggregate([ 
+    {
+      $sort : { datePaie : 1}
+    },
     { 
       $match: { 
-        [{ $month: "$datePaie" }] : { $eq : Number(req.params.month)} 
-        // [{ $year: "$datePaie" }] : Number(req.params.year) 
+        datePaie: {
+          $lt: to,
+          $gte: from
+       }
       }
     },
     {
@@ -114,8 +121,8 @@ paiementRoutes.get("/days/:month/:year", (req, res) => {
       }
   }
 ])
+    .sort({ "_id.jour": 1 })
     .then((result) => {
-  console.log("sdsfdsffsdfsf",result);
   if (result.length > 0) {
         res.json(result);
       } else {
