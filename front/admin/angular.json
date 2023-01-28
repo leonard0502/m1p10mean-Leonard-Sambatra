@@ -25,7 +25,7 @@
               "node_modules/font-awesome-scss/scss/font-awesome.scss",
               "node_modules/ti-icons/css/themify-icons.css",
               "src/assets/icon/icofont/css/icofont.scss",
-              "src/assets/scss/spinner.css",
+              "src/assets/scss/spinner.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -91,7 +91,7 @@
               "node_modules/font-awesome-scss/scss/font-awesome.scss",
               "node_modules/ti-icons/css/themify-icons.css",
               "src/assets/icon/icofont/css/icofont.scss",
-              "src/assets/scss/spinner.css",
+              "src/assets/scss/spinner.scss",
               "src/styles.scss"
             ],
             "assets": [

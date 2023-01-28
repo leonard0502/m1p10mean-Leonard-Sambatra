@@ -176,4 +176,32 @@ ficheRoutes.get("/getFicheById/:id", (req, res) => {
         });
       });
   });
+
+
+  ficheRoutes.get("/etat/:etat", (req, res) => {
+    let query = [{ "_id":{$ne:null} }];
+    if ( req?.params?.etat ) {
+      query.push({ etat : { $eq : req?.params?.etat}});
+    }
+    Fiche.find({$and: [...query],})
+    .populate('idVoiture')
+      .populate('idUser')
+      .sort({ "dateFiche": 1 })
+      .then((result) => {
+        if (result.length > 0) {
+          res.json(result);
+        } else {
+          res.json({
+            status: "ECHEC",
+            message: "Aucun fiche",
+          });
+        }
+      })
+      .catch((error) => {
+        res.json({
+          status: "ECHEC",
+          message: `Une erreur s'est produit lors de l'obtention des fiches ${error.message}!`,
+        });
+      });
+  });
 module.exports = ficheRoutes;
