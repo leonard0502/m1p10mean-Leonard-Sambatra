@@ -4,14 +4,14 @@ const ObjectId = require("mongodb").ObjectId;
 const Paiement = require("../models/Paiement");
 const Fiche = require("../models/Fiche");
 
-paiementRoutes.post("/Payer", (req, res) => {
+paiementRoutes.post("/", (req, res) => {
   let { idFiche, montantAPayer,remise,datePaie } = req.body;
   if(remise === undefined) remise = 0;
   const newPaiement = new Paiement({
     idFiche: ObjectId(idFiche),
     montantAPayer: montantAPayer,
     remise:remise,
-    montantPayer : montant -(montant*remise/100),
+    montantPayer : montantAPayer -(montantAPayer*remise/100),
     datePaie: datePaie,
   });
   newPaiement
@@ -23,7 +23,7 @@ paiementRoutes.post("/Payer", (req, res) => {
           if (err) {
             res.json({
               status: "ECHEC",
-              message: "Paiement echoué!",
+              message: `Paiement echoué ${err.message}!`,
             });
           } else {
             res.json({
@@ -33,12 +33,104 @@ paiementRoutes.post("/Payer", (req, res) => {
           }
         });
       })
-      .catch(() => {
+      .catch((err) => {
         res.json({
           status: "ECHEC",
-          message: "Paiement echoué!",
+          message: `Paiement echoué ${err.message}!`,
         });
       });
+});
+
+paiementRoutes.get("/", (req, res) => {
+  Paiement.find({})
+    .then((result) => {
+      if (result.length > 0) {
+        res.json(result);
+      } else {
+        res.json({
+          status: "ECHEC",
+          message: "Aucun paiement",
+        });
+      }
+    })
+    .catch(() => {
+      res.json({
+        status: "ECHEC",
+        message: "Une erreur s'est produit lors de l'obtention des paiements!",
+      });
+    });
+});
+
+/**
+ * Get stat par mois 
+ */
+paiementRoutes.get("/years", (req, res) => {
+  Paiement.aggregate([ {
+    $group : {
+      _id : [{
+        mois : {$month : "$datePaie"},
+        annee : {$year : "$datePaie"}
+     }],
+      chiffreAffaire : { $sum : "$montantPayer"}
+    }
+  }])
+    .then((result) => {
+      if (result.length > 0) {
+        res.json(result);
+      } else {
+        res.json({
+          status: "ECHEC",
+          message: "Aucun paiement",
+        });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        status: "ECHEC",
+        message: `Une erreur s'est produit lors de l'obtention des paiements ${err.message}!`,
+      });
+    });
+});
+
+/**
+ * Get stat par jours
+ */
+paiementRoutes.get("/days/:month/:year", (req, res) => {
+  Paiement.aggregate([ 
+    { 
+      $match: { 
+        [{ $month: "$datePaie" }] : { $eq : Number(req.params.month)} 
+        // [{ $year: "$datePaie" }] : Number(req.params.year) 
+      }
+    },
+    {
+      $group : {
+        _id : [{
+          jour : {$dayOfMonth : "$datePaie"},
+          mois : {$month : "$datePaie"},
+          annee : {$year : "$datePaie"}
+      }],
+        chiffreAffaire : { $sum : "$montantPayer"}
+      }
+  }
+])
+    .then((result) => {
+  console.log("sdsfdsffsdfsf",result);
+  if (result.length > 0) {
+        res.json(result);
+      } else {
+        res.json({
+          status: "ECHEC",
+          message: "Aucun paiement",
+        });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        status: "ECHEC",
+        message: `Une erreur s'est produit lors de l'obtention des paiements ${err.message}!`,
+      });
+    });
 });
 // paiementRoutes.get("/getPaiement", (req, res) => {
 //   let { start, end, typePaie } = req.query;

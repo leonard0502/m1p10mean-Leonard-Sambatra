@@ -4,6 +4,7 @@ import { HttpClientModule }  from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './layout/admin/admin.component';
@@ -14,7 +15,8 @@ import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthInterceptorProvider } from './service/auth.service';
 import { FicheGarageComponent } from './fiche/fiche-garage/fiche-garage.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { StatistiqueComponent } from './statistique/statistique.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     BreadcrumbsComponent,
     TitleComponent,
     AuthComponent,
-    FicheGarageComponent
+    FicheGarageComponent,
+    StatistiqueComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     FormsModule,
     DragDropModule
+    // DashboardDefaultRoutingModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [AuthInterceptorProvider],

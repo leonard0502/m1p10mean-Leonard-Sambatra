@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AdminComponent} from './layout/admin/admin.component';
 import {AuthComponent} from './layout/auth/auth.component';
 import { FicheGarageComponent } from './fiche/fiche-garage/fiche-garage.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'garage',
         component: FicheGarageComponent
+      },
+      {
+        path: 'statistique',
+        component: StatistiqueComponent
       },
       {
         path: 'basic',

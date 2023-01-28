@@ -1,0 +1,54 @@
+<div class="row">
+
+  <!-- Statistics Start -->
+  <div class="col-md-12 col-xl-8">
+    <app-card [title]="'Chiffre d\'affaire pour cette année'" [classHeader]="true">
+      <span class="code-header"><span class="text-muted">Groupé par mois.</span></span>
+      <div id="line-example" class="line-example">
+        <div id="statistics-chart" style="height:300px;"></div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-md-12 col-xl-4">
+
+      <!-- card1 start -->
+  <div class="col-md-12">
+    <div class="card widget-card-1">
+      <div class="card-block-small">
+        <i class="icofont icofont-time bg-c-blue card1-icon"></i>
+        <span class="text-c-blue f-w-600">Temps de réparation moyenne</span>
+        <h4> 1 h/véhicule</h4>
+        <div>
+        <span class="f-left m-t-10 text-muted">
+          <i class="text-c-blue f-16 icofont icofont-check m-r-10"></i>Performant
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- card1 end -->
+
+    <div class="card card-blue total-card">
+      <div class="card-block">
+        <div class="text-left">
+          <h4>4000</h4>
+          <p class="m-0">Total Sales</p>
+        </div>
+        <span class="label bg-c-blue value-badges">12%</span>
+      </div>
+      <chart [type]="'line'" [data]="totalValueGraphData1" [options]="totalValueGraphOption" style="width: 100%; height: 100px;"></chart>
+    </div>
+
+  </div>
+
+  <!-- Statistics End -->
+
+  <!-- email Sent Start -->
+  <div class="col-md-12">
+    <app-card [title]="'Chiffre d\'affaire pour ce mois-ci'" [cardClass]="'email-sent-card'" [classHeader]="true">
+      <span class="code-header"><span class="text-muted">Groupé par jours.</span></span>
+      <div id="email-sent" style="max-width:100%;height:400px;"></div>
+    </app-card>
+  </div>
+  <!-- email Sent End -->
+</div>

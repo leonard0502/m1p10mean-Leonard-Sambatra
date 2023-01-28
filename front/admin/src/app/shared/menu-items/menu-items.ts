@@ -46,7 +46,14 @@ const MENUITEMS = [
         short_label: 'D',
         name: 'Garage',
         type: 'link',
-        icon: 'ti-home'
+        icon: 'ti-clipboard'
+      },
+      {
+        state: 'statistique',
+        short_label: 'D',
+        name: 'Statistique',
+        type: 'link',
+        icon: 'ti-bar-chart'
       },
       {
         state: 'depense',
