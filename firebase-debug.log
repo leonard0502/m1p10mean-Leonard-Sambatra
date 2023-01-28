@@ -1,0 +1,21 @@
+[debug] [2023-01-27T18:01:39.790Z] ----------------------------------------------------------------------
+[debug] [2023-01-27T18:01:39.793Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\lpple\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-01-27T18:01:39.794Z] CLI Version:   11.21.0
+[debug] [2023-01-27T18:01:39.794Z] Platform:      win32
+[debug] [2023-01-27T18:01:39.794Z] Node Version:  v16.16.0
+[debug] [2023-01-27T18:01:39.795Z] Time:          Fri Jan 27 2023 21:01:39 GMT+0300 (heure normale d’Afrique de l’Est)
+[debug] [2023-01-27T18:01:39.795Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-01-27T18:01:39.805Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-27T18:01:39.805Z] > authorizing via signed-in user (lppleonard1@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\GitHub\m1p10mean-Leonard-Sambatra
+

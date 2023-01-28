@@ -10,7 +10,7 @@
                                 <div class="col">
                                     <label>Numéro Voiture</label>
                                     <div class="mb-3">
-                                        <select class="form-control" formControlName="numero" [(ngModel)]="numero">
+                                        <select class="form-control" formControlName="numero" >
                                             <option *ngFor="let vehicule of listVehicule" value={{vehicule._id}} >{{vehicule.matricule+' '+vehicule.marque}}</option>
                                           </select>
                                     </div>
