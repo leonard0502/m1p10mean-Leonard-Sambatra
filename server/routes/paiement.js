@@ -4,20 +4,21 @@ const ObjectId = require("mongodb").ObjectId;
 const Paiement = require("../models/Paiement");
 const Fiche = require("../models/Fiche");
 
-paiementRoutes.post("/", (req, res) => {
-  let { idFiche, montantAPayer,remise,datePaie } = req.body;
+paiementRoutes.put("/:idFiche", (req, res) => {
+  let { somme } = req.body;
+  let remise = 0;
   if(remise === undefined) remise = 0;
   const newPaiement = new Paiement({
-    idFiche: ObjectId(idFiche),
-    montantAPayer: montantAPayer,
+    idFiche: ObjectId(req.params.idFiche),
+    montantAPayer: somme,
     remise:remise,
-    montantPayer : montantAPayer -(montantAPayer*remise/100),
-    datePaie: datePaie,
+    montantPayer : somme -(somme*remise/100),
+    datePaie: new Date(),
   });
   newPaiement
     .save()
     .then(() => {
-        Fiche.updateOne({_id: ObjectId(idFiche)}, {etatPaie : 1} , function(
+        Fiche.updateOne({_id: ObjectId(req.params.idFiche)}, {etatPaie : 1} , function(
           err,
         ) {
           if (err) {

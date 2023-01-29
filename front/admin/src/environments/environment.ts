@@ -10,4 +10,5 @@ export const environment = {
   Voiture_base_url : 'http://localhost:3050/voiture',
   Fiche_base_url : 'http://localhost:3050/fiche',
   User_base_url : 'http://localhost:3050/user',
+  Paiement_base_url : 'http://localhost:3050/paiement'
 };

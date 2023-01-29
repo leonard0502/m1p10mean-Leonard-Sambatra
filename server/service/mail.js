@@ -1,5 +1,7 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
+const dotenv = require('dotenv');
+dotenv.config();
 
 let transporter = nodemailer.createTransport({
   pool: true,
@@ -10,9 +12,9 @@ let transporter = nodemailer.createTransport({
     user: process.env.AUTH_EMAIL,
     pass: process.env.AUTH_PASS,
   },
-  // tls: {
-  //   rejectUnauthorized: false
-  // } 
+  tls: {
+    rejectUnauthorized: false
+  } 
 
 });
 

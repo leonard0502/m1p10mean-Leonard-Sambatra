@@ -50,15 +50,18 @@ voitureRoutes.get("/", (req, res) => {
 });
 
 voitureRoutes.get("/getAllRepParVoiture/:idVoiture", (req,res) => {
+  console.log(req.params.idVoiture);
     let reparation = [];
-    Fiche.find({idVoiture : ObjectId(req.query.idVoiture)})
+    Fiche.find({idVoiture : ObjectId(req.params.idVoiture)})
       .then((result) => {
+        console.log(result);
         if (result.length > 0) {
             result.forEach((res) => {
                 res.reparation.forEach((rep) => {
                     reparation.push(rep);
                 });
             });
+            console.log(reparation);
             res.json(reparation);
         } else {
           res.json({

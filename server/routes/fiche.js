@@ -177,7 +177,6 @@ ficheRoutes.get("/getFicheById/:id", (req, res) => {
   });
 
   ficheRoutes.get("/getAllRepParVoiture/:idFiche", async (req,res) => {
-    console.log(req.params.idFiche);
     let reparation = [];
       await Fiche.find({_id : ObjectId(req.params.idFiche)})
       .then((result) => {
@@ -202,7 +201,30 @@ ficheRoutes.get("/getFicheById/:id", (req, res) => {
         });
       });
   });
-
+  ficheRoutes.get("/pourPaie", async (req,res) => {
+      await Fiche.find({ $and: [
+        {etat: {$eq: 2}},
+        {etatPaie : {$eq: 0}},
+        ]})
+      .then((result) => {
+        if (result) {
+          console.log(result);
+            res.json(result);
+        } else {
+          res.json({
+            status: "ECHEC",
+            message: "Cette voiture a aucune Reparation ",
+          });
+        }
+      })
+      .catch(() => {
+        res.json({
+          status: "ECHEC",
+          message: "Une erreur s'est produit lors de l'obtention des reoaration de cette voiture!",
+        });
+      });
+  });
+  
 
   ficheRoutes.get("/etat/:etat", (req, res) => {
     let query = [{ "_id":{$ne:null} }];

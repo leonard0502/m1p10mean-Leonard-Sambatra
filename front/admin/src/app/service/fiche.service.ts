@@ -12,6 +12,14 @@ export class FicheService {
   constructor(private http : HttpClient){
 
   }
+  validerPaiement(idFiche,somme) {
+    let url = environment.Paiement_base_url+'/'+idFiche;
+    return this.http.put(url, {somme});
+  }
+  pourPaie() {
+    let url = environment.Fiche_base_url+'/pourPaie';
+    return this.http.get(url);
+  }
   getReparationParIdFiche(idFiche : string) {
     let url = environment.Fiche_base_url+'/getAllRepParVoiture/'+idFiche;
     return this.http.get(url);

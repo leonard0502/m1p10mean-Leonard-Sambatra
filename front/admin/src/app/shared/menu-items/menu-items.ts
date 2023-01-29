@@ -38,8 +38,18 @@ const MENUITEMS = [
         state: 'fiche',
         short_label: 'D',
         name: 'Fiche',
-        type: 'link',
-        icon: 'ti-home'
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'liste-fiche',
+            name: 'Liste fiche'
+          },
+          {
+            state: 'fiche-paiement',
+            name: 'Validation paiement'
+          }
+        ]
       },
       {
         state: 'garage',
@@ -76,17 +86,9 @@ const MENUITEMS = [
         icon: 'ti-home',
         children: [
           {
-            state: 'ajout-reparation',
-            name: 'Ajout-réparation'
-          },
-          {
             state: 'historique-reparation',
             name: 'Historique-réparation'
           },
-          {
-            state: 'facture',
-            name: 'Facture'
-          }
         ]
       },
       {

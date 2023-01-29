@@ -30,7 +30,7 @@ export class HistoriqueReparationComponent implements OnInit {
   ngHistorique() {
     console.log("huhu", this.ficheForm.value.numero);
     this.voitureService.getReparationVoiture(this.ficheForm.value.numero)
-    .subscribe((resultat) => {
+    .subscribe((resultat : any) => {
       this.listReparation=resultat;
       console.log(resultat);
     })

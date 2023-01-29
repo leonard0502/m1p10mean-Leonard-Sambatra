@@ -10,6 +10,7 @@ export class FactureComponent implements OnInit {
   idFiche !: string;
   listReparation : any;
   dateNow : Date;
+  somme !: number;
 
   constructor(private ficheService : FicheService, private activatedRoute : ActivatedRoute) { }
 
@@ -20,10 +21,20 @@ export class FactureComponent implements OnInit {
   }
   getFactureVoiture() {
     this.ficheService.getReparationParIdFiche(this.idFiche)
-    .subscribe(resultat => {
+    .subscribe((resultat :any) => {
       this.listReparation=resultat;
+      this.sommer(resultat);
+      console.log(this.somme);
       console.log(resultat);
     })
   }
+  sommer(array : any) {
+    let total =0;
+      for(let a = 0; a < array.length; a++) {
+        total += array[a].prix;
+      }
+      this.somme = total;
+  }
+
 
 }

@@ -6,6 +6,41 @@ const maxAge = 3 * 24 * 60 * 60 * 1000;
 const SECRET_KEY = "NOTESAPI"; //cle de securite ze tina atao fa tsy votery io NOTES... io
 const jwt = require("jsonwebtoken");
 const mailService = require("./../service/mail");
+const nodemailer = require("nodemailer");
+const dotenv = require('dotenv');
+dotenv.config();
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.AUTH_EMAIL,
+      pass: process.env.AUTH_PASS,
+    }
+  });
+  
+  const envoyerEmail = ( sujet,text,email, res) => {
+    const mailOptions = {
+        from: process.env.AUTH_EMAIL,
+        to: email,
+        subject: sujet,
+        html: "<!DOCTYPE html><html><head><style>body{justify-content: center;}div.centrer {margin: 0px 50px 0px 50px;justify-content: center;align-items: center;}div.adresse {line-height: 7px;text-align: center;color: gray;}</style></head><body>"+
+        "<div class=`centrer`>"+text+"</div><div class=`adresse`><p><b>Andavamamba</b></p><p><b>Lot III X 12 Antananarivo</b></p><p><b>contact@garage.com</b></p><p><b>M1-P10-Léonard-Sambatra</b></p></div></div></body></html>"  
+      };
+    
+      console.log(mailOptions) 
+            transporter
+              .sendMail(mailOptions)
+              .then(() => {
+                console.log("fini");
+              })
+              .catch((err) => {
+                console.log(err); 
+                // res.json({
+                //   status: "ECHEC",
+                //   message: "Erreur de hachage des données email!",
+                // });
+              });
+    };
 
 userRoutes.post("/login", async (req, res) => {
 
@@ -54,6 +89,7 @@ userRoutes.post("/login", async (req, res) => {
 });
 
 userRoutes.post("/inscription", async (req, res) => {
+
   const {
       nom,prenom,email,mdp,contact
   } = req.body;
@@ -79,8 +115,11 @@ userRoutes.post("/inscription", async (req, res) => {
           type: 'c'
       }).save().then(function (user) {
           const sujet ="Inscription Garage";
-            const text ="Bonjour Madame/Monsieur,"+user.nom+" "+user.prenom+".\n Vous êtes incrit dans notre garage!!"
-        //   mailService.sendEmail(sujet, text,user.email);
+        const text ="Bonjour Madame/Monsieur,"+user.nom+" "+user.prenom+".\n Vous êtes incrit dans notre garage!!"
+          mailService.sendEmail(sujet, text,user.email);
+        
+            // envoyerEmail(sujet, text,user.email);
+        
           const token = jwt.sign({
               email: user.email,
               id: user._id
