@@ -18,6 +18,17 @@ export class FicheGarageComponent implements OnInit{
 
   }
 
+  getMoyenne(reps : any[]) : number{
+    let ret = 0;
+    if(reps.length ===0 ) {
+      return 0;
+    }
+    reps.map((val)=>{
+      ret += val.avancement;
+    });
+    return ret/reps.length;
+}
+
   ngOnInit() {
   this.loadingcreer = true;
   this.loadingrecep = true;
@@ -48,15 +59,50 @@ export class FicheGarageComponent implements OnInit{
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
-      if( event.container.id === 'cdk-drop-list-0') {
-        this.loadingcreer = true;
-        const stop= await this.ficheService.modifierEtatFiche((event.container.data[event.currentIndex])._id,'0');
-        this.loadingcreer = false;
-      }
       if( event.container.id === 'cdk-drop-list-1') {
+        this.loadingcreer = true;
+        // this.loadingrecep = true;
+        const stop= await this.ficheService.modifierEtatFiche((event.container.data[event.currentIndex])._id,'0');
+        this.ficheService.getUserFichegarage('0').subscribe((value)=>{
+          if(value.length){
+            this.creer= value;
+          } else {
+            this.creer=[];
+          }
+          this.loadingcreer = false;
+        });
+        // this.ficheService.getUserFichegarage('1').subscribe((value)=>{
+        //   if(value.length){
+        //     this.enreception= value;
+        //   } else {
+        //     this.enreception=[];
+        //   }
+        //   this.loadingrecep = false;
+        // });
+        // this.loadingrecep = false;
+
+      }
+      if( event.container.id === 'cdk-drop-list-0') {
+        // this.loadingcreer = true;
         this.loadingrecep = true;
         const stop= await this.ficheService.modifierEtatFiche((event.container.data[event.currentIndex])._id,'1');
-        this.loadingrecep = false;
+        // this.ficheService.getUserFichegarage('0').subscribe((value)=>{
+        //   if(value.length){
+        //     this.creer= value;
+        //   } else {
+        //     this.creer=[];
+        //   }
+        //   this.loadingcreer = false;
+        // });
+        this.ficheService.getUserFichegarage('1').subscribe((value)=>{
+          if(value.length){
+            this.enreception= value;
+          } else {
+            this.enreception=[];
+          }
+          this.loadingrecep = false;
+        });
+        // this.loadingcreer = false;
       }
     }
   }

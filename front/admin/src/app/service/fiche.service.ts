@@ -52,11 +52,15 @@ export class FicheService {
      return this.http.put(environment.back+'/fiche/'+id,{etat}).subscribe((res : any) => {if(res.message) {
       alert(res.message);
     } else {
-      if( etat === '1' ) {
-      alert("Fiche réceptionner");
-      } else {
-        alert("Fiche en création");
-      }
+      // if( etat === '1' ) {
+      // alert("Fiche réceptionner");
+      // } else if( etat === '0' ) {
+      //   alert("Fiche en création");
+      // } else if( etat === '2' ) {
+      //   alert("Fiche à récupérer");
+      // } else if( etat === '3' ) {
+      //   alert("Fiche Récupérer");
+      // }
     }});
    }
 }

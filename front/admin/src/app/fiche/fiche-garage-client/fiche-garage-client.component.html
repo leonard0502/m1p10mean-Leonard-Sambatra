@@ -43,7 +43,7 @@
                 <div class="btn-wrapper" *ngIf="fiche.reparation.length > 0">
                   <a [routerLink]="['/fiche/details/'+fiche._id]" class="btn btn-primary mb-3 mb-sm-0">Détails</a>
                   <a href="#" [routerLink]="['/voiture/facture/'+fiche._id]" class="btn btn-secondary mb-3 mb-sm-0">Facture</a>
-                  <a *ngIf="fiche.etatPaie === 1" class="btn btn-success mb-3 mb-sm-0">Récupérer</a>
+                  <a *ngIf="fiche.etat === 2" (click)="recuperer(fiche._id)" class="btn btn-success mb-3 mb-sm-0">Récupérer</a>
                 </div>
                 <p *ngIf="fiche.reparation.length === 0"> ... </p>
               </td>

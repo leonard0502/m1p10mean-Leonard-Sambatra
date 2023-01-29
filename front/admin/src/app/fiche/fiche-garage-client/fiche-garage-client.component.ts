@@ -2,6 +2,7 @@ import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FicheDepotService} from '../../service/fiche-depot';
+import { FicheService } from '../../service/fiche.service';
 
 
 
@@ -26,7 +27,7 @@ export class FicheGarageClientComponent implements OnInit {
       });
       return ret/reps.length;
   }
-  constructor(private ficheDepotService : FicheDepotService) {
+  constructor(private ficheDepotService : FicheDepotService,private ficheService : FicheService) {
 
    }
 
@@ -40,6 +41,11 @@ export class FicheGarageClientComponent implements OnInit {
     this.listeFiche$ = this.ficheDepotService.getUserFichegarage(this.idUser);
     this.loading = false;
   }
-
+  async recuperer(_id : string) {
+    this.loading = true;
+    const stop= await this.ficheService.modifierEtatFiche(_id,'3');
+    this.listeFiche$ = this.ficheDepotService.getUserFichegarage(this.idUser);
+    this.loading = false;
+  }
 
 }

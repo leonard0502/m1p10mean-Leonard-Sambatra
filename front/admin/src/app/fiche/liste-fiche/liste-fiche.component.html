@@ -5,7 +5,12 @@
                 <div class="col-md-12 d-flex flex-column mx-auto">
                     <h1 style="padding-bottom: 20px;">Liste réparation : </h1>
                     <div class="card card-plain mt-8">
-                        <div class="card-body">
+                        <div *ngIf="loading" class="d-flex justify-content-center" style="width: 100%; height: 500px;">
+                          <div class="spinner-border" style="width: 5rem; height: 5rem; margin: auto; " role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                        </div>
+                        <div *ngIf="!loading" class="card-body">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -17,10 +22,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let liste of ficheListe">   
+                                    <tr *ngFor="let liste of ficheListe">
                                         <td> {{liste.idVoiture.matricule}} | {{liste.idVoiture.marque}}</td>
                                         <!-- <td>{{liste.idUser.nom}} {{liste.idUser.prenom}}</td> -->
-                                        <td>{{liste.etat}}</td>
+                                        <td>{{liste.etat}}
+                                          <p *ngIf="liste.etat === 0">En réception</p>
+                                          <p *ngIf="liste.etat === 1">En cours</p>
+                                          <p *ngIf="liste.etat === 2">à Récupérer</p>
+                                          <p *ngIf="liste.etat === 3">Terminé</p>
+                                        </td>
                                         <div  *ngIf="liste.etatPaie==0;then nonPayer"></div>
                                         <ng-template #nonPayer>
                                             <td class="text-success">Non Payer</td>
@@ -32,6 +42,7 @@
                                         <td>{{liste.dateFiche | date: 'le d MMMM yyyy à HH:mm '}}</td>
                                         <td><a href="voiture/ajout-reparation/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir réparation</a></td>
                                         <td><a href="voiture/facture/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir facture</a></td>
+                                        <td><a *ngIf="(liste.etat === 1 && getMoyenne(liste.reparation) === 2)" (click)="bonDeSotie(liste._id)" href="voiture/facture/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Bon de sortie</a></td>
                                     </tr>
                                 </tbody>
                             </table>
