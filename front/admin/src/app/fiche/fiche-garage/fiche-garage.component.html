@@ -34,8 +34,8 @@
       <div class="example-box" *ngFor="let item of enreception" cdkDrag>
         {{item.idVoiture.matricule}}|{{item.idVoiture.marque}}|{{item.etat}}
         <div class="btn-wrapper" >
-          <a [routerLink]="['/fiche/'+item._id]" class="btn btn-primary mb-3 mb-sm-0">Réparation</a>
-          <a href="#" *ngIf="item.reparation.length > 0" class="btn btn-secondary mb-3 mb-sm-0">Facturer</a>
+          <a [routerLink]="['/voiture/ajout-reparation/'+item._id]" class="btn btn-primary mb-3 mb-sm-0">Réparation</a>
+          <a href="#" *ngIf="item.reparation.length > 0" [routerLink]="['/voiture/facture/'+item._id]" class="btn btn-secondary mb-3 mb-sm-0">Facturer</a>
           <a *ngIf="item.etatPaie === 1" class="btn btn-success mb-3 mb-sm-0">Bon de sortie</a>
         </div>
       </div>

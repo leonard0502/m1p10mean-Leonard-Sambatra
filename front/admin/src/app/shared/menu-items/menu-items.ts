@@ -32,7 +32,67 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-    label: 'Navigation',
+    label: 'Client',
+    main: [
+      {
+        state: 'voiture',
+        short_label: 'D',
+        name: 'Voiture',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'historique-reparation',
+            name: 'Historique-réparation'
+          },
+        ]
+      }
+    ],
+  },
+  {
+    label: 'Atelier',
+    main: [
+      {
+        state: 'fiche',
+        short_label: 'D',
+        name: 'Fiche',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'liste-fiche',
+            name: 'Liste fiche'
+          },
+          {
+            state: 'fiche-paiement',
+            name: 'Validation paiement'
+          }
+        ]
+      },
+      {
+        state: 'statistique',
+        short_label: 'D',
+        name: 'Statistique',
+        type: 'link',
+        icon: 'ti-bar-chart'
+      },
+      {
+        state: 'depense',
+        short_label: 'D',
+        name: 'Depense',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'ajout',
+            name: 'Ajout Dépense'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: 'Financier',
     main: [
       {
         state: 'fiche',
@@ -54,61 +114,9 @@ const MENUITEMS = [
       {
         state: 'garage',
         short_label: 'D',
-        name: 'Garage',
+        name: 'Réception en garage',
         type: 'link',
         icon: 'ti-clipboard'
-      },
-      {
-        state: 'statistique',
-        short_label: 'D',
-        name: 'Statistique',
-        type: 'link',
-        icon: 'ti-bar-chart'
-      },
-      {
-        state: 'depense',
-        short_label: 'D',
-        name: 'Depense',
-        type: 'sub',
-        icon: 'ti-home',
-        children: [
-          {
-            state: 'ajout',
-            name: 'Ajout Dépense'
-          }
-        ]
-      },
-      {
-        state: 'voiture',
-        short_label: 'D',
-        name: 'Voiture',
-        type: 'sub',
-        icon: 'ti-home',
-        children: [
-          {
-            state: 'historique-reparation',
-            name: 'Historique-réparation'
-          },
-        ]
-      },
-      {
-        state: 'notifications',
-        short_label: 'n',
-        name: 'Notifications',
-        type: 'link',
-        icon: 'ti-crown'
-      },
-    ],
-  },
-  {
-    label: 'Tables',
-    main: [
-      {
-        state: 'bootstrap-table',
-        short_label: 'B',
-        name: 'Bootstrap Table',
-        type: 'link',
-        icon: 'ti-receipt'
       }
     ]
   },

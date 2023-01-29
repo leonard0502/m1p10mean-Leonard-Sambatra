@@ -50,7 +50,7 @@
                                     <tr *ngFor="let liste of reparationListe">
                                         <td> {{liste.intitule}}</td>
                                         <td>{{liste.prix}}</td>
-                                        <td>{{liste.dateDebut | date: 'le d MMMM yyyy à HH:mm '</td>
+                                        <td>{{liste.dateDebut | date: 'le d MMMM yyyy à HH:mm '}} </td>
                                         <td><div class="progress">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [ngStyle]="{'width.%' : liste.avancement*50}"></div>
                                         </div></td>
@@ -64,7 +64,7 @@
                                         </ng-template>
                                         <div  *ngIf="liste.avancement==2;then fin"></div>
                                         <ng-template #fin>
-                                            <td>C'est déjà terminer {{liste.dateFin | date: 'le d MMMM yyyy à HH:mm '</td>
+                                            <td>C'est déjà terminer {{liste.dateFin | date: 'le d MMMM yyyy à HH:mm ' }}</td>
                                         </ng-template>
                                     </tr>
                                 </tbody>
