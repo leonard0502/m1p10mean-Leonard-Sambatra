@@ -46,11 +46,57 @@ const MENUITEMS = [
             name: 'Historique-réparation'
           },
         ]
-      }
+      },
+      {
+        state: 'fiche',
+        short_label: 'D',
+        name: 'Fiche',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'depot',
+            name: 'Depot voiture'
+          },
+          {
+            state: 'garage',
+            name: 'Encours de réparation'
+          }
+        ]
+      },
     ],
   },
   {
     label: 'Atelier',
+    main: [
+      {
+        state: 'fiche',
+        short_label: 'D',
+        name: 'Fiche',
+        type: 'sub',
+        icon: 'ti-home',
+        children: [
+          {
+            state: 'liste-fiche',
+            name: 'Liste fiche'
+          },
+          {
+            state: 'fiche-paiement',
+            name: 'Validation paiement'
+          }
+        ]
+      },
+      {
+        state: 'garage',
+        short_label: 'D',
+        name: 'Réception en garage',
+        type: 'link',
+        icon: 'ti-clipboard'
+      }
+    ]
+  },
+  {
+    label: 'Finance',
     main: [
       {
         state: 'fiche',
@@ -88,35 +134,6 @@ const MENUITEMS = [
             name: 'Ajout Dépense'
           }
         ]
-      }
-    ]
-  },
-  {
-    label: 'Financier',
-    main: [
-      {
-        state: 'fiche',
-        short_label: 'D',
-        name: 'Fiche',
-        type: 'sub',
-        icon: 'ti-home',
-        children: [
-          {
-            state: 'liste-fiche',
-            name: 'Liste fiche'
-          },
-          {
-            state: 'fiche-paiement',
-            name: 'Validation paiement'
-          }
-        ]
-      },
-      {
-        state: 'garage',
-        short_label: 'D',
-        name: 'Réception en garage',
-        type: 'link',
-        icon: 'ti-clipboard'
       }
     ]
   },

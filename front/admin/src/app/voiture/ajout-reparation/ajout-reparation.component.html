@@ -52,7 +52,7 @@
                                         <td>{{liste.prix}}</td>
                                         <td>{{liste.dateDebut | date: 'le d MMMM yyyy à HH:mm '}} </td>
                                         <td><div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [ngStyle]="{'width.%' : liste.avancement*50}"></div>
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [ngStyle]="{'width.%' : liste.avancement*50}">{{liste.avancement*50}}%</div>
                                         </div></td>
                                         <div  *ngIf="liste.avancement==0;then debuter"></div>
                                         <ng-template #debuter>

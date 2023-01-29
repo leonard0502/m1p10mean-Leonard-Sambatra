@@ -37,7 +37,6 @@ import { StatistiqueComponent } from './statistique/statistique.component';
     ReactiveFormsModule,
     FormsModule,
     DragDropModule
-    // DashboardDefaultRoutingModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [AuthInterceptorProvider],
