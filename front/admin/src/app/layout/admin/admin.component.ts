@@ -56,6 +56,7 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
   ]
 })
 export class AdminComponent implements OnInit {
+  asideItems : any;
   navType: string; /* st1, st2(default), st3, st4 */
   themeLayout: string; /* vertical(default) */
   layoutType: string; /* dark, light */
@@ -160,8 +161,11 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.asideItems = this.menuItems.getMenu();
     this.setBackgroundPattern('pattern2');
+
   }
+  
 
   onResize(event) {
     this.innerHeight = event.target.innerHeight + 'px';

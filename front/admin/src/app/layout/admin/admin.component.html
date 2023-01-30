@@ -78,7 +78,7 @@
           <div class="sidebar_toggle"><a href="javascript:;"><i class="icon-close icons"></i></a></div>
           <div class="pcoded-inner-navbar main-menu" appAccordion>
             <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config">
-              <div *ngFor="let asideItems of menuItems.getAll()" class="d-color">
+              <!-- <div *ngFor="let asideItems of menuItems.getMenu()" class="d-color"> -->
                 <div class="pcoded-navigatio-lavel" [attr.menu-title-theme]="menuTitleTheme">{{asideItems.label}}</div>
                 <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder" [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder" *ngFor="let asideItem of asideItems.main" appAccordionLink group="{{asideItem.state}}">
                   <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'external'" appAccordionLink group="{{asideItem.state}}">
@@ -148,7 +148,7 @@
                     </ul>
                   </li>
                 </ul>
-              </div>
+              <!-- </div> -->
             </perfect-scrollbar>
           </div>
         </nav>
@@ -181,7 +181,7 @@
             <div class="col-md-3">
             <div class="copyright">
               &copy; 2023
-              <a href="#" target="_blank">Méca</a>.
+              <a href="" target="_blank">Méca</a>.
             </div>
           </div>
           <div class="col-md-6">

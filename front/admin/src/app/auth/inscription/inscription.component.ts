@@ -30,6 +30,7 @@ export class InscriptionComponent implements OnInit {
       console.log(response);
       if(response) {
         localStorage.setItem("tokenUser", response.token);
+        localStorage.setItem("type", response.type);
         // if(response[0].type=='f'){
         //   this.router.navigate(['Client/depot_voiture']);
         // }else if(response[0].role.intitule=='atelier'){

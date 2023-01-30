@@ -26,14 +26,12 @@ export interface MainMenuItems {
 }
 
 export interface Menu {
-  type : string,
   label: string;
   main: MainMenuItems[];
 }
 
 const MENUITEMS = [
   {
-    type : 'c',
     label: 'Client',
     main: [
       {
@@ -69,7 +67,6 @@ const MENUITEMS = [
     ],
   },
   {
-    type : 'a',
     label: 'Atelier',
     main: [
       {
@@ -99,7 +96,6 @@ const MENUITEMS = [
     ]
   },
   {
-    type : 'f',
     label: 'Finance',
     main: [
       {
@@ -144,17 +140,11 @@ const MENUITEMS = [
 ];
 
 @Injectable()
-export class MenuItems {
+export class MenuItemsClient {
   getAll(): Menu[] {
     return MENUITEMS;
   }
-  getMenu() : Menu {
-    for(let i =0; i <MENUITEMS.length ; i++) {
-      if(localStorage.getItem("type") == MENUITEMS[i].type) {
-        return MENUITEMS[i];
-      }
-    }
-  }
+
   /*add(menu: Menu) {
     MENUITEMS.push(menu);
   }*/

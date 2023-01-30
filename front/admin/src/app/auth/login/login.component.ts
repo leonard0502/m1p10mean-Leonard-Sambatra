@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
       console.log(response);
       if(response) {
         localStorage.setItem("tokenUser", response.token);
-        if(response.type=='c'){
+        localStorage.setItem("type", response.type);
+        // if(response.type=='c'){
           this.router.navigate(['']);
         // }else if(response[0].role.intitule=='atelier'){
         //   this.router.navigate(['Atelier/reception_voiture']);
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         //   this.router.navigate(['Financier/liste_paiement']);
         // }else{
         //   this.router.navigate(['']);
-        }
+        // }
       }else {
         this.router.navigate(['auth']);
       }
