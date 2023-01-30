@@ -40,9 +40,9 @@
                                             <td class="text-success">Payé</td>
                                         </ng-template>
                                         <td>{{liste.dateFiche | date: 'le d MMMM yyyy à HH:mm '}}</td>
-                                        <td><a href="voiture/ajout-reparation/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir réparation</a></td>
-                                        <td><a href="voiture/facture/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir facture</a></td>
-                                        <td><a *ngIf="(liste.etat === 1 && getMoyenne(liste.reparation) === 2)" (click)="bonDeSotie(liste._id)" href="voiture/facture/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Bon de sortie</a></td>
+                                        <td><a href="/page/voiture/ajout-reparation/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir réparation</a></td>
+                                        <td><a href="/page/voiture/facture/{{liste._id}}" class="text-secondary text-gradient font-weight-bold">Voir facture</a></td>
+                                        <td><a *ngIf="(liste.etat === 1 && getMoyenne(liste.reparation) === 2)" (click)="bonDeSotie(liste._id)" class="text-secondary text-gradient font-weight-bold">Bon de sortie</a></td>
                                     </tr>
                                 </tbody>
                             </table>

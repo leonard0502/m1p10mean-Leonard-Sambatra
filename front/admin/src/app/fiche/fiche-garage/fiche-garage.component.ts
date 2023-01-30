@@ -51,6 +51,20 @@ export class FicheGarageComponent implements OnInit{
     });
   }
 
+  async bonDeSotie(_id : string) {
+    this.loadingrecep = true;
+    const stop= await this.ficheService.modifierEtatFiche(_id,'2');
+    this.ficheService.getUserFichegarage('1').subscribe((value)=>{
+      if(value.length){
+        this.enreception= value;
+      } else {
+        this.enreception=[];
+      }
+      this.loadingrecep = false;
+    });
+    this.loadingrecep = false;
+  }
+
    async drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
