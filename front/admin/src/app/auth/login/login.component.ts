@@ -26,19 +26,19 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginForm.value)
     .subscribe((response : any) => {
       console.log(response);
-      if(response) {
+      if(response.nom != undefined) {
         localStorage.setItem("tokenUser", response.token);
         localStorage.setItem("type", response.type);
         localStorage.setItem("idUser", response.idUser);
-        // if(response.type=='c'){
+        if(response.type=='c'){
+          this.router.navigate(['fiche/depot']);
+        }else if(response.type=='a'){
+          this.router.navigate(['fiche/liste-fiche']);
+        }else if(response.type=='f'){
+          this.router.navigate(['statistique']);
+        }else{
           this.router.navigate(['']);
-        // }else if(response[0].role.intitule=='atelier'){
-        //   this.router.navigate(['Atelier/reception_voiture']);
-        // }else if(response[0].role.intitule=='financier'){
-        //   this.router.navigate(['Financier/liste_paiement']);
-        // }else{
-        //   this.router.navigate(['']);
-        // }
+        }
       }else {
         this.router.navigate(['auth']);
       }
