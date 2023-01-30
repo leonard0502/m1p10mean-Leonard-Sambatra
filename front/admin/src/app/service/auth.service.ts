@@ -13,8 +13,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 })
 
 
-
-@Injectable()
 export class AuthService implements HttpInterceptor {
 
   constructor(private authService: AuthService ) {}

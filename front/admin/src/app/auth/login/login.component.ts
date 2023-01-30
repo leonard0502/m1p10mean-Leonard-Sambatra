@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       if(response) {
         localStorage.setItem("tokenUser", response.token);
         localStorage.setItem("type", response.type);
+        localStorage.setItem("idUser", response.idUser);
         // if(response.type=='c'){
           this.router.navigate(['']);
         // }else if(response[0].role.intitule=='atelier'){
