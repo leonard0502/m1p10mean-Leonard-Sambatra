@@ -33,11 +33,11 @@ export class InscriptionComponent implements OnInit {
         localStorage.setItem("type", response.type);
         localStorage.setItem("idUser", response.idUser);
         if(response.type=='c'){
-          this.router.navigate(['fiche/depot']);
+          this.router.navigate(['page/fiche/depot']);
         }else if(response.type=='a'){
-          this.router.navigate(['fiche/liste-fiche']);
+          this.router.navigate(['page/fiche/liste-fiche']);
         }else if(response.type=='f'){
-          this.router.navigate(['statistique']);
+          this.router.navigate(['page/statistique']);
         }else{
           this.router.navigate(['']);
         }

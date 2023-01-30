@@ -41,8 +41,8 @@
               <td>{{ (getMoyenne(fiche.reparation)*50) | number}} %</td>
               <td>
                 <div class="btn-wrapper" *ngIf="fiche.reparation.length > 0">
-                  <a [routerLink]="['/fiche/details/'+fiche._id]" class="btn btn-primary mb-3 mb-sm-0">Détails</a>
-                  <a href="#" [routerLink]="['/voiture/facture/'+fiche._id]" class="btn btn-secondary mb-3 mb-sm-0">Facture</a>
+                  <a [routerLink]="['page/fiche/details/'+fiche._id]" class="btn btn-primary mb-3 mb-sm-0">Détails</a>
+                  <a href="#" [routerLink]="['page/voiture/facture/'+fiche._id]" class="btn btn-secondary mb-3 mb-sm-0">Facture</a>
                   <a *ngIf="fiche.etat === 2" (click)="recuperer(fiche._id)" class="btn btn-success mb-3 mb-sm-0">Récupérer</a>
                 </div>
                 <p *ngIf="fiche.reparation.length === 0"> ... </p>

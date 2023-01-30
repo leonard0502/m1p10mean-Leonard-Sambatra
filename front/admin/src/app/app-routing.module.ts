@@ -7,13 +7,9 @@ import { StatistiqueComponent } from './statistique/statistique.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'page',
     component: AdminComponent,
     children: [
-      {
-        path: '',
-        component: FicheGarageComponent
-      },
       {
         path: 'garage',
         component: FicheGarageComponent
@@ -30,7 +26,7 @@ const routes: Routes = [
 
     ]
   },
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
+  { path: '', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
 ];
 
 @NgModule({
