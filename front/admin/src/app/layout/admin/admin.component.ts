@@ -167,7 +167,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngDeconnecter() {
-    // localStorage.clear();
+    localStorage.clear();
     this.router.navigate(
       ['/auth']
      );
