@@ -25,9 +25,10 @@ export class LoginComponent implements OnInit {
     console.log('donnee entree: ', this.loginForm.value);
     this.userService.login(this.loginForm.value)
     .subscribe((response : any) => {
-      console.log(response);
       if(response.nom != undefined) {
+        console.log(response);
         localStorage.setItem("tokenUser", response.token);
+        console.log(localStorage.getItem("tokenUser"));
         localStorage.setItem("type", response.type);
         localStorage.setItem("idUser", response.idUser);
         if(response.type=='c'){

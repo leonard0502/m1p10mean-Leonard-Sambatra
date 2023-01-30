@@ -48,7 +48,6 @@ export class FicheDepotComponent implements OnInit {
     this.listVehicule$ = this.ficheDepotService.getVoitureUser(this.idUser);
     this.loading = false;
 
-
   }
 
   ngOnChanges() {

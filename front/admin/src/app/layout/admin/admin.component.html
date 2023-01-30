@@ -18,7 +18,7 @@
             <i class="ti-menu"></i>
           </a>
           <a [routerLink]="['/']">
-            <h4>Admin Garage</h4>
+            <h4> Garage</h4>
           </a>
           <a (click)="onMobileMenu()" class="mobile-options">
             <i class="ti-more"></i>
@@ -29,11 +29,11 @@
           <div>
             <ul [@mobileMenuTop]="isCollapsedMobile" class="nav-right" [ngClass]="isCollapsedMobile">
               <li class="user-profile header-notification">
-                <a [routerLink]="['/']">
+                
                   <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
                   <span>Utilisateur</span>
                   <i class="ti-angle-down"></i>
-                </a>
+                
                 <ul class="show-notification profile-notification">
                   <li>
                     <button type="button" class="btn btn-default
