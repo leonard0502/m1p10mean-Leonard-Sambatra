@@ -31,34 +31,14 @@
               <li class="user-profile header-notification">
                 <a [routerLink]="['/']">
                   <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                  <span>John Doe</span>
+                  <span>Utilisateur</span>
                   <i class="ti-angle-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
                   <li>
-                    <a [routerLink]="['/crm-contact']">
-                      <i class="ti-settings"></i> Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/user/profile']">
-                      <i class="ti-user"></i> Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/advance/notifications']">
-                      <i class="ti-email"></i> My Messages
-                    </a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/authentication/lock-screen']" target="_blank">
-                      <i class="ti-lock"></i> Lock Screen
-                    </a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/authentication/login/with-bg-image']">
-                      <i class="ti-layout-sidebar-left"></i> Logout
-                    </a>
+                    <button type="button" class="btn btn-default
+                                    btn-round btn-block btn-lg"
+                                    (click)="ngDeconnecter()">Deconnecter</button>
                   </li>
                 </ul>
               </li>
